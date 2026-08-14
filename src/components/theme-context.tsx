@@ -13,7 +13,7 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>(() => {
     
-    const savedTheme = localStorage.getItem('nabha-sihata-theme') as Theme;
+    const savedTheme = localStorage.getItem('city-sihata-theme') as Theme;
     if (savedTheme) {
       return savedTheme;
     }
@@ -32,7 +32,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     
-    localStorage.setItem('nabha-sihata-theme', theme);
+    localStorage.setItem('city-sihata-theme', theme);
     
     
     if (theme === 'dark') {
@@ -47,7 +47,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     const handleChange = (e: MediaQueryListEvent) => {
       
-      const savedTheme = localStorage.getItem('nabha-sihata-theme');
+      const savedTheme = localStorage.getItem('city-sihata-theme');
       if (!savedTheme) {
         setTheme(e.matches ? 'dark' : 'light');
       }

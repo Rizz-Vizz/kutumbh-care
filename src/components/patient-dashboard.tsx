@@ -21,8 +21,8 @@ import { MentalHealthAwareness } from './mental-health-awareness';
 
 import { SimplePharmacyWallet } from './simple-pharmacy-wallet';
 
-
 import { PregnancyDashboard } from './pregnancy-dashboard';
+import { VitalsTracker } from './vitals-tracker';
 import { 
   ArrowLeft, 
   CreditCard, 
@@ -47,7 +47,7 @@ import emergencyIcon from '@/assets/8ee6850e4652ec7e70c14a069845b51d4d91cfed.png
 import consultationIcon from '@/assets/b7f41f1a17075196391d0be4c6f70303dfa34c07.png';
 import medbotIcon from '@/assets/8feea50d19adacf7309cbe12afdcb46d3362883c.png';
 
-type ActivePanel = 'dashboard' | 'healthcard' | 'consultation' | 'symptoms' | 'voice-symptoms' | 'emergency' | 'appointments' | 'hospitals' | 'pharmacies' | 'medical-records' | 'survey' | 'notifications' | 'pregnancy' | 'medcoins' | 'period-care' | 'mental-health' | 'pharmacy-wallet';
+type ActivePanel = 'dashboard' | 'healthcard' | 'consultation' | 'symptoms' | 'voice-symptoms' | 'emergency' | 'appointments' | 'hospitals' | 'pharmacies' | 'medical-records' | 'survey' | 'notifications' | 'pregnancy' | 'medcoins' | 'period-care' | 'mental-health' | 'pharmacy-wallet' | 'vitals';
 
 interface PatientDashboardProps {
   onBack: () => void;
@@ -157,7 +157,9 @@ export function PatientDashboard({ onBack, selectedMember }: PatientDashboardPro
 
 
 
-
+  if (activePanel === 'vitals') {
+    return <VitalsTracker />;
+  }
 
   const baseMenuItems = [
     
@@ -226,7 +228,15 @@ export function PatientDashboard({ onBack, selectedMember }: PatientDashboardPro
       customImage: null,
       priority: 7
     },
-    
+    {
+      id: 'vitals',
+      icon: Heart,
+      label: 'Health Vitals & Wearables',
+      bgColor: 'bg-rose-500',
+      emoji: '📈',
+      customImage: null,
+      priority: 8
+    },
     {
       id: 'hospitals',
       icon: MapPin,

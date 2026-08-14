@@ -295,7 +295,7 @@ try {
 ```json
 {
   "patientId": "123e4567-e89b-12d3-a456-426614174000",
-  "locationName": "Nabha Central Market",
+  "locationName": "City Central Market",
   "wasteStatus": false,
   "stagnantWater": true,
   "pestInfestation": true,

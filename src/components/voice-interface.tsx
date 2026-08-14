@@ -465,7 +465,7 @@ export function VoiceInterface({ isListening, setIsListening, onNavigate }: Voic
       {}
       <div className="mt-3 text-center">
         <p className="text-xs text-gray-500">
-          {language === 'en' ? 'AI-powered • Natural speech in English, Hindi & Punjabi' : 
+          {language === 'en' ? 'AI-powered • Natural speech in English, Hindi & Statei' : 
            language === 'hi' ? 'AI-संचालित • अंग्रेजी, हिंदी और पंजाबी में प्राकृतिक भाषण' : 
            'AI-ਸੰਚਾਲਿਤ • ਅੰਗਰੇਜ਼ੀ, ਹਿੰਦੀ ਅਤੇ ਪੰਜਾਬੀ ਵਿੱਚ ਕੁਦਰਤੀ ਭਾਸ਼ਣ'}
         </p>

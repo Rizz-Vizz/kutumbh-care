@@ -310,7 +310,7 @@ export function PrescriptionPad({ onBack, patientId }: PrescriptionPadProps) {
           <div class="header">
             <h1>MEDICAL PRESCRIPTION</h1>
             <p>Dr. Demo Singh - General Medicine</p>
-            <p>Civil Hospital Nabha, Punjab</p>
+            <p>Civil Hospital City, State</p>
             <p>Date: ${new Date().toLocaleDateString()}</p>
           </div>
           ${prescriptionHTML}

@@ -140,7 +140,7 @@ export function OurDoctors({ onBack, symptomData }: OurDoctorsProps) {
   const handleWhatsAppChat = (phoneNumber: string, doctorName: string) => {
     
     const whatsappNumber = phoneNumber.replace('+91 ', '91').replace(/\s/g, '');
-    const message = `Hi ${doctorName}, I need medical consultation through Nabha Sihata telemedicine app.`;
+    const message = `Hi ${doctorName}, I need medical consultation through Kutumbh Care telemedicine app.`;
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
   };
@@ -148,7 +148,7 @@ export function OurDoctors({ onBack, symptomData }: OurDoctorsProps) {
   const handleWhatsAppVideoCall = (phoneNumber: string, doctorName: string) => {
     
     const whatsappNumber = phoneNumber.replace('+91 ', '91').replace(/\s/g, '');
-    const message = `Hi ${doctorName}, I need a video consultation through Nabha Sihata. Can we schedule a WhatsApp video call?`;
+    const message = `Hi ${doctorName}, I need a video consultation through Kutumbh Care. Can we schedule a WhatsApp video call?`;
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
   };
@@ -175,7 +175,7 @@ export function OurDoctors({ onBack, symptomData }: OurDoctorsProps) {
     
     message += `Message: ${offlineAppointmentData.message}\n`;
     message += `Priority: ${offlineAppointmentData.urgency.toUpperCase()}\n`;
-    message += `Requested via Nabha Sihata app at ${new Date().toLocaleString()}`;
+    message += `Requested via Kutumbh Care app at ${new Date().toLocaleString()}`;
 
     
     const smsNumber = selectedDoctor.phone.replace('+91 ', '').replace(/\s/g, '');
@@ -506,7 +506,7 @@ export function OurDoctors({ onBack, symptomData }: OurDoctorsProps) {
         </div>
 
         <div className="mt-8 text-center text-sm text-gray-500">
-          <p>All doctors are licensed medical professionals serving the Nabha region</p>
+          <p>All doctors are licensed medical professionals serving the City region</p>
           <p className="mt-1">Teleconsultation fees: ₹50 per session • Emergency consultations: Free</p>
         </div>
       </div>

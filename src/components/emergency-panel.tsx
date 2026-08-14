@@ -39,7 +39,7 @@ export function EmergencyPanel({ onBack }: EmergencyPanelProps) {
       number: '+91-1234567890',
       icon: '🏥',
       color: 'bg-blue-500',
-      description: 'Civil Hospital Nabha'
+      description: 'Civil Hospital City'
     },
     {
       id: 'police',
@@ -169,7 +169,7 @@ export function EmergencyPanel({ onBack }: EmergencyPanelProps) {
           </h3>
           <div className="bg-gray-50 p-4 rounded-lg">
             <div className="flex items-center justify-between mb-2">
-              <span className="font-medium">Nabha, Punjab, India</span>
+              <span className="font-medium">City, State, India</span>
               <Button size="sm" variant="outline">
                 <Navigation className="w-4 h-4 mr-2" />
                 Share Location
@@ -193,7 +193,7 @@ export function EmergencyPanel({ onBack }: EmergencyPanelProps) {
           <div className="space-y-3">
             <div className="flex items-center justify-between p-3 bg-blue-50 rounded-lg">
               <div>
-                <h4 className="font-semibold text-blue-800">Civil Hospital Nabha</h4>
+                <h4 className="font-semibold text-blue-800">Civil Hospital City</h4>
                 <p className="text-sm text-blue-600">2.1 km away • 5 min drive</p>
               </div>
               <Button size="sm" onClick={() => handleEmergencyCall('+91-1234567890', 'Civil Hospital')}>

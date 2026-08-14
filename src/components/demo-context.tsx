@@ -33,12 +33,12 @@ export const DemoProvider: React.FC<DemoProviderProps> = ({
     full_name: userType === 'patient' ? 'Demo Patient' : 
                userType === 'pregnant' ? 'Priya Sharma' : 'Dr. Demo Singh',
     phone: '+91-9876543210',
-    email: `demo.${userType}@nabhasihata.com`,
+    email: `demo.${userType}@kutumbhcare.com`,
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
     village: 'Demo Village',
-    district: 'Nabha',
-    state: 'Punjab',
+    district: 'City',
+    state: 'State',
     pregnancy_status: userType === 'pregnant' ? {
       weeks_pregnant: 24,
       due_date: '2025-03-20',
@@ -50,7 +50,7 @@ export const DemoProvider: React.FC<DemoProviderProps> = ({
   
   const demoUser = userType ? {
     id: 'demo-' + userType,
-    email: `demo.${userType}@nabhasihata.com`,
+    email: `demo.${userType}@kutumbhcare.com`,
     user_metadata: { full_name: demoProfile?.full_name }
   } : null;
   

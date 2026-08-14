@@ -187,7 +187,7 @@ export function PaymentGateway({
     { id: 'hdfc', name: 'HDFC Bank', logo: '🏛️' },
     { id: 'icici', name: 'ICICI Bank', logo: '🏦' },
     { id: 'axis', name: 'Axis Bank', logo: '🏛️' },
-    { id: 'pnb', name: 'Punjab National Bank', logo: '🏦' },
+    { id: 'pnb', name: 'State National Bank', logo: '🏦' },
     { id: 'canara', name: 'Canara Bank', logo: '🏛️' }
   ];
 

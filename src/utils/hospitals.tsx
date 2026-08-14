@@ -36,14 +36,14 @@ export const getCurrentLocation = (): Promise<UserLocation> => {
   return new Promise((resolve, reject) => {
     
     if (!navigator.geolocation) {
-      console.warn('Geolocation not supported by browser, using default location (Nabha, Punjab)');
+      console.warn('Geolocation not supported by browser, using default location (City, State)');
       resolve({ lat: 30.37, lng: 76.15 });
       return;
     }
 
     
     if (location.protocol !== 'https:' && location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
-      console.warn('Geolocation requires HTTPS, using default location (Nabha, Punjab)');
+      console.warn('Geolocation requires HTTPS, using default location (City, State)');
       resolve({ lat: 30.37, lng: 76.15 });
       return;
     }
@@ -59,7 +59,7 @@ export const getCurrentLocation = (): Promise<UserLocation> => {
           
           
           if (coords.lat < -90 || coords.lat > 90 || coords.lng < -180 || coords.lng > 180) {
-            console.warn('Invalid coordinates received, using default location (Nabha, Punjab)');
+            console.warn('Invalid coordinates received, using default location (City, State)');
             resolve({ lat: 30.37, lng: 76.15 });
             return;
           }
@@ -87,7 +87,7 @@ export const getCurrentLocation = (): Promise<UserLocation> => {
           
           
           if (error.code === error.PERMISSION_DENIED) {
-            console.log('Geolocation failed, using default location (Nabha, Punjab):', errorMessage);
+            console.log('Geolocation failed, using default location (City, State):', errorMessage);
           }
           resolve({ lat: 30.37, lng: 76.15 });
         },
@@ -100,7 +100,7 @@ export const getCurrentLocation = (): Promise<UserLocation> => {
     } catch (error: any) {
       
       if (error.message && error.message.includes('permissions policy')) {
-        console.warn('Geolocation blocked by permissions policy, using default location (Nabha, Punjab)');
+        console.warn('Geolocation blocked by permissions policy, using default location (City, State)');
       } else {
         console.warn('Geolocation error:', error.message || 'Unknown error');
       }
@@ -176,17 +176,17 @@ const getSampleHospitals = (): Hospital[] => {
       rating: 4.2,
       latitude: 30.39354,
       longitude: 76.19093,
-      address: 'Patiala Gate, Nabha, Punjab',
+      address: 'Patiala Gate, City, State',
       contact: '+91-9876543210'
     },
     {
       id: '2',
-      name: 'Civil Hospital Nabha',
+      name: 'Civil Hospital City',
       type: 'General',
       rating: 3.8,
       latitude: 30.37123,
       longitude: 76.15456,
-      address: 'Hospital Road, Nabha, Punjab',
+      address: 'Hospital Road, City, State',
       contact: '+91-9876543211'
     },
     {
@@ -196,7 +196,7 @@ const getSampleHospitals = (): Hospital[] => {
       rating: 4.7,
       latitude: 30.74123,
       longitude: 76.77890,
-      address: 'Phase 7, Mohali, Punjab',
+      address: 'Phase 7, Mohali, State',
       contact: '+91-9876543212'
     },
     {
@@ -206,7 +206,7 @@ const getSampleHospitals = (): Hospital[] => {
       rating: 4.5,
       latitude: 30.73456,
       longitude: 76.78123,
-      address: 'Sector 62, Mohali, Punjab',
+      address: 'Sector 62, Mohali, State',
       contact: '+91-9876543213'
     },
     {
@@ -216,7 +216,7 @@ const getSampleHospitals = (): Hospital[] => {
       rating: 4.1,
       latitude: 30.38789,
       longitude: 76.16234,
-      address: 'Near Bus Stand, Nabha, Punjab',
+      address: 'Near Bus Stand, City, State',
       contact: '+91-9876543214'
     },
     {
@@ -226,17 +226,17 @@ const getSampleHospitals = (): Hospital[] => {
       rating: 4.3,
       latitude: 30.36567,
       longitude: 76.17890,
-      address: 'Medical Road, Nabha, Punjab',
+      address: 'Medical Road, City, State',
       contact: '+91-9876543215'
     },
     {
       id: '7',
-      name: 'Nabha Emergency Care',
+      name: 'City Emergency Care',
       type: 'Emergency',
       rating: 4.0,
       latitude: 30.38123,
       longitude: 76.16789,
-      address: 'Main Market, Nabha, Punjab',
+      address: 'Main Market, City, State',
       contact: '+91-108'
     },
     {
@@ -246,7 +246,7 @@ const getSampleHospitals = (): Hospital[] => {
       rating: 3.9,
       latitude: 30.37890,
       longitude: 76.15123,
-      address: 'Mall Road, Nabha, Punjab',
+      address: 'Mall Road, City, State',
       contact: '+91-9876543217'
     }
   ];

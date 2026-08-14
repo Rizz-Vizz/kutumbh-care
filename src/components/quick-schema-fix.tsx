@@ -34,7 +34,7 @@ export function QuickSchemaFix({ onBack, onComplete }: QuickSchemaFixProps) {
     try {
       
       const schemaSQL = `
--- Comprehensive schema fix for Nabha Sihata
+-- Comprehensive schema fix for Kutumbh Care
 -- This script addresses all missing database components causing errors
 
 -- =============================================================================
@@ -310,25 +310,25 @@ GRANT SELECT ON user_profiles TO anon;`;
               rating: 4.2,
               latitude: 30.39354,
               longitude: 76.19093,
-              address: 'Patiala Gate, Nabha, Punjab',
+              address: 'Patiala Gate, City, State',
               contact: '+91-9876543210'
             },
             {
-              name: 'Civil Hospital Nabha',
+              name: 'Civil Hospital City',
               type: 'General',
               rating: 3.8,
               latitude: 30.37123,
               longitude: 76.15456,
-              address: 'Hospital Road, Nabha, Punjab',
+              address: 'Hospital Road, City, State',
               contact: '+91-9876543211'
             },
             {
-              name: 'Nabha Emergency Care',
+              name: 'City Emergency Care',
               type: 'Emergency',
               rating: 4.0,
               latitude: 30.38123,
               longitude: 76.16789,
-              address: 'Main Market, Nabha, Punjab',
+              address: 'Main Market, City, State',
               contact: '+91-108'
             }
           ];

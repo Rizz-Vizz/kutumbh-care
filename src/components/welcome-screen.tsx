@@ -35,7 +35,7 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onContinue }) => {
 
         {}
         <h1 className="text-3xl font-bold text-gray-800 mb-3">
-          {t('welcomeToNabhaSihata') || 'Welcome to Nabha Sihata!'}
+          {t('welcomeToKutumbhCare') || 'Welcome to Kutumbh Care!'}
         </h1>
         
         <div className="bg-gray-50 rounded-lg p-6 mb-6">
@@ -77,7 +77,7 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onContinue }) => {
         {}
         <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
           <p className="text-sm text-blue-800">
-            <strong>🎮 Demo Account:</strong> You're using a demo account to explore Nabha Sihata's features. 
+            <strong>🎮 Demo Account:</strong> You're using a demo account to explore Kutumbh Care's features. 
             All data is for demonstration purposes only.
           </p>
         </div>

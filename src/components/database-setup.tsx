@@ -38,7 +38,7 @@ export function DatabaseSetup({ onBack, onComplete }: DatabaseSetupProps) {
     }
   };
 
-  const basicSchemaSql = `-- Basic Nabha Sihata Database Schema
+  const basicSchemaSql = `-- Basic Kutumbh Care Database Schema
 -- Copy and paste this entire section into your Supabase SQL Editor
 
 -- 1. Profiles table (extends Supabase auth.users)
@@ -447,7 +447,7 @@ ON CONFLICT (setting_key) DO NOTHING;`;
             <Database className="w-6 h-6" />
             <span>Database Setup</span>
           </h1>
-          <p className="text-gray-600">Set up your Supabase database for Nabha Sihata</p>
+          <p className="text-gray-600">Set up your Supabase database for Kutumbh Care</p>
         </div>
       </div>
 

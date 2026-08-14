@@ -236,7 +236,7 @@ export function VoiceCommandHelp({ className = '' }: { className?: string }) {
           ? 'आप हिंदी या अंग्रेजी में बोल सकते हैं' 
           : language === 'pa'
           ? 'ਤੁਸੀਂ ਪੰਜਾਬੀ ਜਾਂ ਅੰਗਰੇਜ਼ੀ ਵਿੱਚ ਬੋਲ ਸਕਦੇ ਹੋ'
-          : 'Speak clearly in English, Hindi, or Punjabi'
+          : 'Speak clearly in English, Hindi, or Statei'
         }
       </div>
     </div>

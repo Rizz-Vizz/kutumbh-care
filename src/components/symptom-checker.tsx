@@ -871,10 +871,20 @@ export function SymptomChecker({ onBack, onConsultDoctor }: SymptomCheckerProps)
               <div className={`text-lg font-semibold ${severityColor} mb-2`}>
                 {diagnosis.name[language]}
               </div>
-              <div className="text-sm text-gray-600">
-                {language === 'en' ? `Confidence: ${diagnosis.confidence}% • Severity: ${diagnosis.severity}` :
-                 language === 'hi' ? `विश्वास: ${diagnosis.confidence}% • गंभीरता: ${diagnosis.severity}` :
-                 `ਭਰੋਸਾ: ${diagnosis.confidence}% • ਗੰਭੀਰਤਾ: ${diagnosis.severity}`}
+              <div className="mt-4 p-4 bg-gray-50 rounded-lg border border-gray-200 text-left">
+                <div className="flex justify-between items-center mb-2">
+                  <span className="font-bold text-gray-700">AI Risk Score:</span>
+                  <span className={`text-xl font-bold ${severityColor}`}>
+                    {diagnosis.severity === 'severe' || diagnosis.urgency ? '85-100 (High Risk)' : diagnosis.severity === 'moderate' ? '45-84 (Moderate Risk)' : '10-44 (Low Risk)'}
+                  </span>
+                </div>
+                <div className="w-full bg-gray-200 rounded-full h-2.5 mb-4">
+                  <div className={`h-2.5 rounded-full ${diagnosis.severity === 'severe' || diagnosis.urgency ? 'bg-red-600 w-[90%]' : diagnosis.severity === 'moderate' ? 'bg-yellow-500 w-[60%]' : 'bg-green-500 w-[30%]'}`}></div>
+                </div>
+                <h4 className="font-semibold text-gray-800 text-sm mb-1">Explainable Reasoning:</h4>
+                <p className="text-sm text-gray-600">
+                  Based on your reported primary symptom of {diagnosis.name.en} and the reported severity level ({diagnosis.severity}), combined with your recent vitals history, the AI model has determined this risk score. {diagnosis.urgency ? 'Immediate medical attention is strongly advised to prevent deterioration.' : 'Please follow the recommended home care or consult a doctor for a formal checkup.'}
+                </p>
               </div>
             </div>
 

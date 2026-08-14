@@ -479,7 +479,7 @@ export function SubscriptionManager({ onBack }: SubscriptionManagerProps) {
         {}
         <Card className="p-8 bg-gradient-to-r from-blue-50 to-purple-50">
           <h3 className="text-2xl font-bold text-gray-800 mb-6 text-center">
-            {language === 'en' ? 'Why Choose Nabha Sihata Subscription?' : language === 'hi' ? 'नभा सिहाता सब्सक्रिप्शन क्यों चुनें?' : 'ਨਭਾ ਸਿਹਾਤਾ ਸਬਸਕਰਿਪਸ਼ਨ ਕਿਉਂ ਚੁਣੋ?'}
+            {language === 'en' ? 'Why Choose Kutumbh Care Subscription?' : language === 'hi' ? 'नभा सिहाता सब्सक्रिप्शन क्यों चुनें?' : 'ਨਭਾ ਸਿਹਾਤਾ ਸਬਸਕਰਿਪਸ਼ਨ ਕਿਉਂ ਚੁਣੋ?'}
           </h3>
           
           <div className="grid md:grid-cols-3 gap-6">

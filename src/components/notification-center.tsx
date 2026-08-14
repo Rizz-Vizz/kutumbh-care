@@ -58,7 +58,7 @@ export function NotificationCenter({ onBack }: NotificationCenterProps) {
             actionableAdvice: 'Remove stagnant water around your home. Use mosquito nets and repellents.',
             diseaseName: 'Dengue Fever',
             severity: 'high',
-            location: 'Nabha, Punjab',
+            location: 'City, State',
             timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
             isRead: false
           },
@@ -80,7 +80,7 @@ export function NotificationCenter({ onBack }: NotificationCenterProps) {
             message: 'Contaminated water source detected near your locality. Boil water before drinking.',
             actionableAdvice: 'Boil drinking water for at least 5 minutes. Use bottled water if possible.',
             severity: 'critical',
-            location: 'Nabha Water Supply',
+            location: 'City Water Supply',
             timestamp: new Date(Date.now() - 6 * 60 * 60 * 1000).toISOString(),
             isRead: false,
             expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString()
@@ -129,7 +129,7 @@ export function NotificationCenter({ onBack }: NotificationCenterProps) {
             actionableAdvice: 'Remove stagnant water around your home. Use mosquito nets and repellents.',
             diseaseName: 'Dengue Fever',
             severity: 'high',
-            location: 'Nabha, Punjab',
+            location: 'City, State',
             timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
             isRead: false
           },
@@ -151,7 +151,7 @@ export function NotificationCenter({ onBack }: NotificationCenterProps) {
             message: 'Contaminated water source detected near your locality. Boil water before drinking.',
             actionableAdvice: 'Boil drinking water for at least 5 minutes. Use bottled water if possible.',
             severity: 'critical',
-            location: 'Nabha Water Supply',
+            location: 'City Water Supply',
             timestamp: new Date(Date.now() - 6 * 60 * 60 * 1000).toISOString(),
             isRead: false,
             expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString()

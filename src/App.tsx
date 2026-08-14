@@ -215,10 +215,10 @@ function AppContent() {
 
   const handleUserTypeSelect = (userType: 'patient' | 'doctor' | 'pregnant') => {
     setSelectedUserType(userType);
-    if (demoMode) {
-      return;
+    if (userType === 'patient' || userType === 'pregnant') {
+      handleDemoProfileSelect('patient');
     } else {
-      setShowAuth(true);
+      handleDemoProfileSelect('doctor');
     }
   };
 
@@ -331,7 +331,7 @@ function AppContent() {
         <div className="text-center max-w-md mx-auto">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
           <p className="text-gray-800 font-medium mb-2">
-            {autoSetupStatus.running ? t('settingUpNabhaSihata') : t('loading')}
+            {autoSetupStatus.running ? t('settingUpKutumbhCare') : t('loading')}
           </p>
           {autoSetupStatus.running && (
             <div className="text-sm text-gray-600 space-y-1">
@@ -441,7 +441,7 @@ function AppContent() {
           <div className="w-28 h-28 mx-auto mb-4 flex items-center justify-center">
             <img 
               src={newLogo} 
-              alt="Nabha Sihata Logo"
+              alt="Kutumbh Care Logo"
               className="w-28 h-28 object-contain"
             />
           </div>
@@ -495,7 +495,7 @@ function AppContent() {
           <div className="w-28 h-28 mx-auto mb-4 flex items-center justify-center">
             <img 
               src={newLogo} 
-              alt="Nabha Sihata Logo"
+              alt="Kutumbh Care Logo"
               className="w-28 h-28 object-contain"
             />
           </div>
@@ -593,12 +593,12 @@ function AppContent() {
             <div className="w-28 h-28 flex items-center justify-center">
               <img 
                 src={newLogo} 
-                alt="Nabha Sihata Logo"
+                alt="Kutumbh Care Logo"
                 className="w-28 h-28 object-contain"
               />
             </div>
             <div>
-              <h1 className="text-3xl font-bold text-green-600">Nabha Sihata</h1>
+              <h1 className="text-3xl font-bold text-green-600">Kutumbh Care</h1>
               <p className="text-gray-600">{t('tagline') || 'Rural Healthcare Made Simple'}</p>
             </div>
           </div>
@@ -730,12 +730,12 @@ function AppContent() {
               <div className="w-28 h-28 flex items-center justify-center">
                 <img 
                   src={newLogo} 
-                  alt="Nabha Sihata Logo"
+                  alt="Kutumbh Care Logo"
                   className="w-28 h-28 object-contain"
                 />
               </div>
               <div className="text-left">
-                <h1 className="text-3xl font-bold text-green-600">Nabha Sihata</h1>
+                <h1 className="text-3xl font-bold text-green-600">Kutumbh Care</h1>
                 <p className="text-gray-600">{t('tagline')}</p>
               </div>
             </div>
@@ -852,12 +852,12 @@ function AppContent() {
               <div className="w-28 h-28 flex items-center justify-center">
                 <img 
                   src={newLogo} 
-                  alt="Nabha Sihata Logo"
+                  alt="Kutumbh Care Logo"
                   className="w-28 h-28 object-contain"
                 />
               </div>
               <div className="text-left">
-                <h1 className="text-3xl font-bold text-green-600">Nabha Sihata</h1>
+                <h1 className="text-3xl font-bold text-green-600">Kutumbh Care</h1>
                 <p className="text-gray-600">{t('tagline')}</p>
               </div>
             </div>
@@ -973,12 +973,12 @@ function AppContent() {
           <div className="w-28 h-28 flex items-center justify-center">
             <img 
               src={newLogo} 
-              alt="Nabha Sihata Logo"
+              alt="Kutumbh Care Logo"
               className="w-28 h-28 object-contain"
             />
           </div>
           <div>
-            <h1 className="text-3xl font-bold text-green-600">Nabha Sihata</h1>
+            <h1 className="text-3xl font-bold text-green-600">Kutumbh Care</h1>
             <p className="text-gray-600">{t('tagline')}</p>
           </div>
         </div>

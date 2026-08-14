@@ -108,7 +108,7 @@ export function DeliveryTracking({ orderId, onBack }: DeliveryTrackingProps) {
           estimatedDelivery: '2024-01-20T18:00:00Z',
           deliveryAddress: {
             name: 'Rajinder Singh',
-            address: 'House No. 123, Sector 45, Nabha, Punjab - 147201',
+            address: 'House No. 123, Sector 45, City, State - 147201',
             phone: '+91 98765 43210'
           },
           currentStatus: 'out-for-delivery',
@@ -130,7 +130,7 @@ export function DeliveryTracking({ orderId, onBack }: DeliveryTrackingProps) {
               description: 'Your order has been confirmed and payment received',
               timestamp: '2024-01-20T10:30:00Z',
               status: 'completed',
-              location: 'Nabha Sihata Pharmacy',
+              location: 'Kutumbh Care Pharmacy',
               icon: CheckCircle
             },
             {
@@ -157,7 +157,7 @@ export function DeliveryTracking({ orderId, onBack }: DeliveryTrackingProps) {
               description: 'Your order is on the way with our delivery partner',
               timestamp: '2024-01-20T14:30:00Z',
               status: 'current',
-              location: 'Last location: Near City Hospital, Nabha',
+              location: 'Last location: Near City Hospital, City',
               icon: Truck
             },
             {
@@ -191,7 +191,7 @@ export function DeliveryTracking({ orderId, onBack }: DeliveryTrackingProps) {
         const currentStep = updatedOrder.trackingSteps.find(step => step.status === 'current');
         if (currentStep) {
           currentStep.timestamp = new Date().toISOString();
-          currentStep.location = 'Last location: Near Main Market, Nabha (2 min ago)';
+          currentStep.location = 'Last location: Near Main Market, City (2 min ago)';
         }
         setOrder(updatedOrder);
       }
@@ -224,7 +224,7 @@ export function DeliveryTracking({ orderId, onBack }: DeliveryTrackingProps) {
 
   const shareTracking = () => {
     
-    navigator.clipboard?.writeText(`Track your Nabha Sihata order: ${window.location.origin}/track/${orderId}`);
+    navigator.clipboard?.writeText(`Track your Kutumbh Care order: ${window.location.origin}/track/${orderId}`);
     toast.success('Tracking link copied to clipboard!');
   };
 

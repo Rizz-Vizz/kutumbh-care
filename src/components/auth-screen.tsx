@@ -370,11 +370,11 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({ userType, onBack }) => {
                   onClick={() => {
                     if (userType === 'patient') {
                       setFormData({
-                        email: 'demo.patient@nabhasihata.com',
+                        email: 'demo.patient@kutumbhcare.com',
                         password: 'demo123',
                         name: 'Demo Patient',
                         phone: '+91 9876543210',
-                        village: 'Nabha',
+                        village: 'City',
                         age: '35',
                         specialty: '',
                         license_number: '',
@@ -382,7 +382,7 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({ userType, onBack }) => {
                       });
                     } else {
                       setFormData({
-                        email: 'demo.doctor@nabhasihata.com',
+                        email: 'demo.doctor@kutumbhcare.com',
                         password: 'demo123',
                         name: 'Dr. Demo Singh',
                         phone: '+91 9876543211',
@@ -390,7 +390,7 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({ userType, onBack }) => {
                         age: '',
                         specialty: 'General Medicine',
                         license_number: 'DMO12345',
-                        hospital: 'Civil Hospital Nabha'
+                        hospital: 'Civil Hospital City'
                       });
                     }
                     

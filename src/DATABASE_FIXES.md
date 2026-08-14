@@ -1,4 +1,4 @@
-# Database Error Fixes for Nabha Sihata
+# Database Error Fixes for Kutumbh Care
 
 This document explains the fixes applied to resolve the database errors reported in the telemedicine app.
 
@@ -12,13 +12,13 @@ This document explains the fixes applied to resolve the database errors reported
 - Created `hospitals` table with proper structure
 - Added `find_nearby_hospitals` function for geolocation-based queries
 - Added `calculate_distance` function for distance calculations
-- Inserted sample hospital data for Nabha and surrounding areas
+- Inserted sample hospital data for City and surrounding areas
 
 ### 2. Geolocation Permission Errors
 **Error:** `Location permission denied by user`
 
 **Solution:**
-- Updated geolocation handling to gracefully fall back to default location (Nabha, Punjab)
+- Updated geolocation handling to gracefully fall back to default location (City, State)
 - Reduced error logging for permission denials (expected behavior)
 - App continues to work with sample hospital data even without location access
 
@@ -74,7 +74,7 @@ This document explains the fixes applied to resolve the database errors reported
 ### Graceful Degradation
 - Hospital finder now works with sample data if database is unavailable
 - Notifications show demo content for unauthenticated users
-- Geolocation failures fall back to default location (Nabha, Punjab)
+- Geolocation failures fall back to default location (City, State)
 - Less intrusive error messages that don't alarm users
 
 ### User Experience
@@ -101,7 +101,7 @@ To prevent these issues in future deployments:
 ## Sample Data Included
 
 The fix includes sample data for:
-- 20 hospitals in Nabha and surrounding Punjab areas
+- 20 hospitals in City and surrounding State areas
 - 5 sample health notifications for testing
 - Proper user profiles compatibility
 

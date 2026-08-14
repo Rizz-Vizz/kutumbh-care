@@ -78,7 +78,7 @@ export function HospitalFinder({ onBack, prioritizeMaternity = false }: Hospital
       
       if (location.lat === 30.37 && location.lng === 76.15) {
         
-        console.log('Using default area (Nabha, Punjab) - location not available');
+        console.log('Using default area (City, State) - location not available');
       } else {
         toast.success('Location detected successfully!');
       }

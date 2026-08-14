@@ -1,6 +1,6 @@
 # Hospital Finder Database Setup
 
-This document explains how to set up the hospital database for the Nabha Sihata telemedicine app.
+This document explains how to set up the hospital database for the Kutumbh Care telemedicine app.
 
 ## Database Schema
 
@@ -105,15 +105,15 @@ Doctors can add hospitals through the app interface (feature to be implemented).
 
 ## Sample Data
 
-The setup script includes 20+ sample hospitals around Punjab:
-- Nabha area hospitals
+The setup script includes 20+ sample hospitals around State:
+- City area hospitals
 - Major hospitals in Patiala, Mohali, Ludhiana
 - Specialized care centers
 
 ## GPS Coordinates Reference
 
-Common coordinates for Punjab:
-- Nabha: 30.37, 76.15
+Common coordinates for State:
+- City: 30.37, 76.15
 - Patiala: 30.34, 76.38
 - Mohali: 30.74, 76.79
 - Ludhiana: 30.90, 75.85

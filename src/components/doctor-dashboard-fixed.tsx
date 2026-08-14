@@ -206,7 +206,7 @@ export function DoctorDashboard({ onBack }: DoctorDashboardProps) {
             <h1 className="font-bold text-gray-800">{t('healthAnalytics')}</h1>
             <div className="flex items-center space-x-3">
               <LanguageSwitcher />
-              <div className="text-sm text-gray-600">Nabha Region</div>
+              <div className="text-sm text-gray-600">City Region</div>
             </div>
           </div>
         </div>
@@ -242,7 +242,7 @@ export function DoctorDashboard({ onBack }: DoctorDashboardProps) {
           <Card className="p-6">
             <h3 className="font-bold text-gray-800 mb-4 flex items-center">
               <Activity className="w-5 h-5 mr-2 text-red-500" />
-              Common Diseases in Nabha Region
+              Common Diseases in City Region
             </h3>
             <div className="space-y-3">
               {analyticsData.commonDiseases.map((disease, index) => (
@@ -274,7 +274,7 @@ export function DoctorDashboard({ onBack }: DoctorDashboardProps) {
             <div className="grid grid-cols-3 gap-4">
               <div className="text-center p-4 bg-green-50 rounded-lg">
                 <div className="text-2xl font-bold text-green-600">342</div>
-                <div className="text-sm text-green-800 mt-1">Nabha City</div>
+                <div className="text-sm text-green-800 mt-1">City City</div>
               </div>
               <div className="text-center p-4 bg-blue-50 rounded-lg">
                 <div className="text-2xl font-bold text-blue-600">156</div>

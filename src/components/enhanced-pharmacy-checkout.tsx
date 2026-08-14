@@ -142,8 +142,8 @@ export function EnhancedPharmacyCheckout({
       phoneNumber: '+91 98765 43210',
       addressLine1: 'House No. 123, Sector 45',
       addressLine2: 'Near Gurudwara',
-      city: 'Nabha',
-      state: 'Punjab',
+      city: 'City',
+      state: 'State',
       pinCode: '147201',
       landmark: 'Opposite City Hospital',
       isDefault: true
@@ -156,8 +156,8 @@ export function EnhancedPharmacyCheckout({
       phoneNumber: '+91 98765 43210',
       addressLine1: 'Office Complex, Block A',
       addressLine2: 'Industrial Area',
-      city: 'Nabha',
-      state: 'Punjab',
+      city: 'City',
+      state: 'State',
       pinCode: '147201',
       landmark: 'Near Bus Stand',
       isDefault: false

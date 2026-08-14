@@ -111,7 +111,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           await fetchUserProfile();
           
           
-          if (session.user.email === 'demo.patient@nabhasihata.com' && event === 'SIGNED_IN') {
+          if (session.user.email === 'demo.patient@kutumbhcare.com' && event === 'SIGNED_IN') {
             console.log('Auto-login detected for demo patient');
           }
         } else {
@@ -158,7 +158,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
             }
           } else {
             
-            if (user?.email === 'demo.patient@nabhasihata.com' || user?.email === 'demo.doctor@nabhasihata.com') {
+            if (user?.email === 'demo.patient@kutumbhcare.com' || user?.email === 'demo.doctor@kutumbhcare.com') {
               console.log('Attempting to create demo user profile with default data');
               const userType = user.email.includes('patient') ? 'patient' : 'doctor';
               const demoUserData = {
@@ -168,12 +168,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
                   user_type: userType,
                   ...(userType === 'patient' && {
                     age: 30,
-                    village: 'Nabha Village'
+                    village: 'City Village'
                   }),
                   ...(userType === 'doctor' && {
                     specialty: 'General Medicine',
                     license_number: 'DEMO123',
-                    hospital: 'Nabha PHC'
+                    hospital: 'City PHC'
                   })
                 }
               };

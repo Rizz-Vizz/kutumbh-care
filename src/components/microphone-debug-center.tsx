@@ -134,7 +134,7 @@ export function MicrophoneDebugCenter({ onClose }: MicrophoneDebugCenterProps) {
       <div className="flex justify-between items-center mb-6">
         <div>
           <h1 className="text-2xl font-bold">🎤 Microphone Debug Center</h1>
-          <p className="text-gray-600">Comprehensive microphone testing and troubleshooting for Nabha Sihata</p>
+          <p className="text-gray-600">Comprehensive microphone testing and troubleshooting for Kutumbh Care</p>
         </div>
         {onClose && (
           <Button variant="ghost" onClick={onClose}>

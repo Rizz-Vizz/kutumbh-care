@@ -36,7 +36,7 @@ export function SettingsScreen({ onBack }: SettingsScreenProps) {
   const [activeSection, setActiveSection] = useState<string | null>(null);
 
   const customerCareNumber = "+91-8699-555-777";
-  const supportEmail = "support@nabhasihata.com";
+  const supportEmail = "support@kutumbhcare.com";
 
   const handleCall = () => {
     if (window.location.protocol === 'https:' || window.location.hostname === 'localhost') {
@@ -49,7 +49,7 @@ export function SettingsScreen({ onBack }: SettingsScreenProps) {
 
   const handleSMS = () => {
     const message = language === 'en' 
-      ? 'Hi, I need help with my Nabha Sihata account.' 
+      ? 'Hi, I need help with my Kutumbh Care account.' 
       : language === 'hi' 
       ? 'नमस्ते, मुझे अपने नभा सिहाता खाते में मदद चाहिए।'
       : 'ਸਤ ਸ੍ਰੀ ਅਕਾਲ, ਮੈਨੂੰ ਆਪਣੇ ਨਭਾ ਸਿਹਾਤਾ ਖਾਤੇ ਵਿੱਚ ਮਦਦ ਚਾਹੀਦੀ ਹੈ।';
@@ -64,7 +64,7 @@ export function SettingsScreen({ onBack }: SettingsScreenProps) {
       id: 'getting-started',
       title: language === 'en' ? 'Getting Started' : language === 'hi' ? 'शुरुआत' : 'ਸ਼ੁਰੂਆਤ',
       icon: PlayCircle,
-      description: language === 'en' ? 'Learn the basics of Nabha Sihata' : language === 'hi' ? 'नभा सिहाता की मूल बातें सीखें' : 'ਨਭਾ ਸਿਹਾਤਾ ਦੀਆਂ ਬੁਨਿਆਦੀ ਗੱਲਾਂ ਸਿੱਖੋ',
+      description: language === 'en' ? 'Learn the basics of Kutumbh Care' : language === 'hi' ? 'नभा सिहाता की मूल बातें सीखें' : 'ਨਭਾ ਸਿਹਾਤਾ ਦੀਆਂ ਬੁਨਿਆਦੀ ਗੱਲਾਂ ਸਿੱਖੋ',
       duration: '3 min'
     },
     {
@@ -112,7 +112,7 @@ export function SettingsScreen({ onBack }: SettingsScreenProps) {
                   {language === 'en' ? 'App Tutorial' : language === 'hi' ? 'ऐप ट्यूटोरियल' : 'ਐਪ ਟਿਊਟੋਰਿਅਲ'}
                 </h1>
                 <p className="text-sm text-gray-600">
-                  {language === 'en' ? 'Learn how to use Nabha Sihata effectively' : language === 'hi' ? 'नभा सिहाता का प्रभावी उपयोग सीखें' : 'ਨਭਾ ਸਿਹਾਤਾ ਦੀ ਪ੍ਰਭਾਵਸ਼ਾਲੀ ਵਰਤੋਂ ਸਿੱਖੋ'}
+                  {language === 'en' ? 'Learn how to use Kutumbh Care effectively' : language === 'hi' ? 'नभा सिहाता का प्रभावी उपयोग सीखें' : 'ਨਭਾ ਸਿਹਾਤਾ ਦੀ ਪ੍ਰਭਾਵਸ਼ਾਲੀ ਵਰਤੋਂ ਸਿੱਖੋ'}
                 </p>
               </div>
             </div>
@@ -321,7 +321,7 @@ export function SettingsScreen({ onBack }: SettingsScreenProps) {
           
           <p className="text-gray-600 mb-4">
             {language === 'en' 
-              ? 'Learn how to use all features of Nabha Sihata with step-by-step video tutorials in your language.'
+              ? 'Learn how to use all features of Kutumbh Care with step-by-step video tutorials in your language.'
               : language === 'hi'
               ? 'अपनी भाषा में चरणबद्ध वीडियो ट्यूटोरियल के साथ नभा सिहाता की सभी सुविधाओं का उपयोग करना सीखें।'
               : 'ਆਪਣੀ ਭਾਸ਼ਾ ਵਿੱਚ ਕਦਮ-ਦਰ-ਕਦਮ ਵੀਡੀਓ ਟਿਊਟੋਰਿਅਲ ਨਾਲ ਨਭਾ ਸਿਹਾਤਾ ਦੀਆਂ ਸਾਰੀਆਂ ਸੁਵਿਧਾਵਾਂ ਦੀ ਵਰਤੋਂ ਸਿੱਖੋ।'
@@ -394,13 +394,13 @@ export function SettingsScreen({ onBack }: SettingsScreenProps) {
               <Info className="w-5 h-5 text-white" />
             </div>
             <h2 className="text-xl font-bold text-gray-800">
-              {language === 'en' ? 'About Nabha Sihata' : language === 'hi' ? 'नभा सिहाता के बारे में' : 'ਨਭਾ ਸਿਹਾਤਾ ਬਾਰੇ'}
+              {language === 'en' ? 'About Kutumbh Care' : language === 'hi' ? 'नभा सिहाता के बारे में' : 'ਨਭਾ ਸਿਹਾਤਾ ਬਾਰੇ'}
             </h2>
           </div>
           
           <p className="text-gray-600 mb-4">
             {language === 'en' 
-              ? 'Nabha Sihata is designed specifically for rural healthcare, making quality medical services accessible to everyone in their local language.'
+              ? 'Kutumbh Care is designed specifically for rural healthcare, making quality medical services accessible to everyone in their local language.'
               : language === 'hi'
               ? 'नभा सिहाता विशेष रूप से ग्रामीण स्वास्थ्य देखभाल के लिए डिज़ाइन किया गया है, जो सभी के लिए उनकी स्थानीय भाषा में गुणवत्तापूर्ण चिकित्सा सेवाओं को सुलभ बनाता है।'
               : 'ਨਭਾ ਸਿਹਾਤਾ ਖਾਸ ਤੌਰ ਤੇ ਪੇਂਡੂ ਸਿਹਤ ਦੇਖਭਾਲ ਲਈ ਡਿਜ਼ਾਈਨ ਕੀਤਾ ਗਿਆ ਹੈ, ਜੋ ਸਭ ਲਈ ਉਨ੍ਹਾਂ ਦੀ ਸਥਾਨਕ ਭਾਸ਼ਾ ਵਿੱਚ ਗੁਣਵੱਤਾ ਵਾਲੀਆਂ ਡਾਕਟਰੀ ਸੇਵਾਵਾਂ ਨੂੰ ਪਹੁੰਚਯੋਗ ਬਣਾਉਂਦਾ ਹੈ।'

@@ -120,8 +120,8 @@ export function OfflineMedicalRecords({ onBack }: OfflineMedicalRecordsProps) {
   });
 
   // Local storage keys
-  const STORAGE_KEY = 'nabha_medical_records';
-  const SYNC_QUEUE_KEY = 'nabha_sync_queue';
+  const STORAGE_KEY = 'city_medical_records';
+  const SYNC_QUEUE_KEY = 'city_sync_queue';
 
   
   useEffect(() => {
@@ -265,7 +265,7 @@ export function OfflineMedicalRecords({ onBack }: OfflineMedicalRecordsProps) {
         type: 'vaccination',
         title: 'COVID-19 Booster',
         description: 'COVID-19 booster vaccination administered.',
-        doctor: 'PHC Nabha',
+        doctor: 'PHC City',
         date: new Date(currentDate.getTime() - 60 * 24 * 60 * 60 * 1000).toISOString(),
         isLocal: true,
         needsSync: false,

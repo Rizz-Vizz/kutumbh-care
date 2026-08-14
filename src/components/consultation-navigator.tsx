@@ -104,7 +104,7 @@ export function ConsultationNavigator({
   const handleWhatsAppChat = (phoneNumber: string, doctorName: string) => {
     const whatsappNumber = phoneNumber.replace('+91 ', '91').replace(/\s/g, '');
     const symptomText = diagnosis?.name?.[language] || 'Medical consultation';
-    const message = `Hi ${doctorName}, I need medical consultation through Nabha Sihata telemedicine app. I'm experiencing: ${symptomText}`;
+    const message = `Hi ${doctorName}, I need medical consultation through Kutumbh Care telemedicine app. I'm experiencing: ${symptomText}`;
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
   };
@@ -112,7 +112,7 @@ export function ConsultationNavigator({
   const handleWhatsAppVideoCall = (phoneNumber: string, doctorName: string) => {
     const whatsappNumber = phoneNumber.replace('+91 ', '91').replace(/\s/g, '');
     const symptomText = diagnosis?.name?.[language] || 'Medical consultation';
-    const message = `Hi ${doctorName}, I need a video consultation through Nabha Sihata for: ${symptomText}. Can we schedule a WhatsApp video call?`;
+    const message = `Hi ${doctorName}, I need a video consultation through Kutumbh Care for: ${symptomText}. Can we schedule a WhatsApp video call?`;
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
   };

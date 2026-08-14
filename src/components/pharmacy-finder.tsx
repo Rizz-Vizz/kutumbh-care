@@ -57,7 +57,7 @@ const samplePharmacies: Pharmacy[] = [
   {
     id: 'p1',
     name: 'Sharma Medical Store',
-    address: 'Main Bazaar, Nabha, Punjab 147201',
+    address: 'Main Bazaar, City, State 147201',
     contact: '+91-9876543210',
     latitude: 30.3753,
     longitude: 76.1539,
@@ -74,7 +74,7 @@ const samplePharmacies: Pharmacy[] = [
   {
     id: 'p2',
     name: 'Apollo Pharmacy',
-    address: 'Civil Hospital Road, Nabha, Punjab 147201',
+    address: 'Civil Hospital Road, City, State 147201',
     contact: '+91-9876543211',
     latitude: 30.3734,
     longitude: 76.1522,
@@ -91,7 +91,7 @@ const samplePharmacies: Pharmacy[] = [
   {
     id: 'p3',
     name: 'Government Medical Store',
-    address: 'Primary Health Centre, Nabha, Punjab 147201',
+    address: 'Primary Health Centre, City, State 147201',
     contact: '+91-9876543212',
     latitude: 30.3712,
     longitude: 76.1567,
@@ -108,7 +108,7 @@ const samplePharmacies: Pharmacy[] = [
   {
     id: 'p4',
     name: 'Jan Aushadhi Kendra',
-    address: 'Bus Stand Road, Nabha, Punjab 147201',
+    address: 'Bus Stand Road, City, State 147201',
     contact: '+91-9876543213',
     latitude: 30.3789,
     longitude: 76.1512,
@@ -125,7 +125,7 @@ const samplePharmacies: Pharmacy[] = [
   {
     id: 'p5',
     name: '24/7 Medical Store',
-    address: 'GT Road, Near Petrol Pump, Nabha, Punjab 147201',
+    address: 'GT Road, Near Petrol Pump, City, State 147201',
     contact: '+91-9876543214',
     latitude: 30.3698,
     longitude: 76.1598,
@@ -142,7 +142,7 @@ const samplePharmacies: Pharmacy[] = [
   {
     id: 'p6',
     name: 'MedPlus Pharmacy',
-    address: 'Patiala Road, Nabha, Punjab 147201',
+    address: 'Patiala Road, City, State 147201',
     contact: '+91-9876543215',
     latitude: 30.3801,
     longitude: 76.1456,
@@ -159,7 +159,7 @@ const samplePharmacies: Pharmacy[] = [
   {
     id: 'p7',
     name: 'Baba Deep Singh Medical Store',
-    address: 'Gurdwara Road, Nabha, Punjab 147201',
+    address: 'Gurdwara Road, City, State 147201',
     contact: '+91-9876543216',
     latitude: 30.3723,
     longitude: 76.1589,
@@ -205,14 +205,14 @@ const calculateDistance = (lat1: number, lon1: number, lat2: number, lon2: numbe
 const getCurrentLocation = (): Promise<UserLocation> => {
   return new Promise((resolve, reject) => {
     if (!navigator.geolocation) {
-      console.warn('Geolocation not supported by browser, using default location (Nabha, Punjab)');
+      console.warn('Geolocation not supported by browser, using default location (City, State)');
       resolve({ lat: 30.37, lng: 76.15 });
       return;
     }
 
     
     if (location.protocol !== 'https:' && location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
-      console.warn('Geolocation requires HTTPS, using default location (Nabha, Punjab)');
+      console.warn('Geolocation requires HTTPS, using default location (City, State)');
       resolve({ lat: 30.37, lng: 76.15 });
       return;
     }
@@ -233,7 +233,7 @@ const getCurrentLocation = (): Promise<UserLocation> => {
           
           
           if (coords.lat < -90 || coords.lat > 90 || coords.lng < -180 || coords.lng > 180) {
-            console.warn('Invalid coordinates received, using default location (Nabha, Punjab)');
+            console.warn('Invalid coordinates received, using default location (City, State)');
             resolve({ lat: 30.37, lng: 76.15 });
             return;
           }
@@ -260,9 +260,9 @@ const getCurrentLocation = (): Promise<UserLocation> => {
           
           
           if (error.code === error.PERMISSION_DENIED) {
-            console.info('Geolocation failed, using default location (Nabha, Punjab):', errorMessage);
+            console.info('Geolocation failed, using default location (City, State):', errorMessage);
           } else {
-            console.warn('Geolocation failed, using default location (Nabha, Punjab):', errorMessage);
+            console.warn('Geolocation failed, using default location (City, State):', errorMessage);
           }
           resolve({ lat: 30.37, lng: 76.15 });
         },
@@ -271,7 +271,7 @@ const getCurrentLocation = (): Promise<UserLocation> => {
     } catch (error: any) {
       
       if (error.message && error.message.includes('permissions policy')) {
-        console.warn('Geolocation blocked by permissions policy, using default location (Nabha, Punjab)');
+        console.warn('Geolocation blocked by permissions policy, using default location (City, State)');
       } else {
         console.warn('Geolocation error:', error.message || 'Unknown error');
       }
@@ -303,7 +303,7 @@ export function PharmacyFinder({ onBack }: PharmacyFinderProps) {
       
       if (location.lat === 30.37 && location.lng === 76.15) {
         
-        console.log('Using default area (Nabha, Punjab) - location not available');
+        console.log('Using default area (City, State) - location not available');
       } else {
         toast.success('Location detected successfully!');
       }

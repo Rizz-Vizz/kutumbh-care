@@ -1,6 +1,6 @@
 <div align="center">
   
-# 🏥 Nabha Sihata
+# 🏥 Kutumbh Care
 ### *Transforming Rural Healthcare: Where Every Village Counts*
 
 <div align="center">
@@ -21,9 +21,9 @@
 
 ## 📖 About The Project
 
-**Nabha Sihata** is a comprehensive mobile and web-based telemedicine platform designed specifically to bridge the healthcare gap in underserved rural areas. It seamlessly connects patients with certified doctors, offering high-quality video and audio consultations, digital prescriptions, and vital follow-up support.
+**Kutumbh Care** is a comprehensive mobile and web-based telemedicine platform designed specifically to bridge the healthcare gap in underserved rural areas. It seamlessly connects patients with certified doctors, offering high-quality video and audio consultations, digital prescriptions, and vital follow-up support.
 
-Recognizing that rural healthcare faces unique challenges such as low digital literacy, poor network connectivity, and language barriers, Nabha Sihata is engineered to overcome these hurdles. With **offline capabilities, low-data usage, and full multilingual support** (English, Hindi, Punjabi), we ensure that every household has uninterrupted access to quality healthcare.
+Recognizing that rural healthcare faces unique challenges such as low digital literacy, poor network connectivity, and language barriers, Kutumbh Care is engineered to overcome these hurdles. With **offline capabilities, low-data usage, and full multilingual support** (English, Hindi, Statei), we ensure that every household has uninterrupted access to quality healthcare.
 
 ---
 
@@ -85,8 +85,8 @@ Make sure you have [Node.js](https://nodejs.org/) (v18+ recommended) and `npm` i
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/YourUsername/telemedicine-app-nabha.git
-   cd telemedicine-app-nabha
+   git clone https://github.com/YourUsername/telemedicine-app-city.git
+   cd telemedicine-app-city
    ```
 
 2. **Install dependencies**

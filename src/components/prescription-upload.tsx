@@ -87,7 +87,7 @@ export function PrescriptionUpload({ onBack, onPrescriptionVerified }: Prescript
         name: 'Dr. Rajesh Sharma',
         registration: 'MCI-12345',
         specialization: 'General Physician',
-        hospital: 'City Hospital, Nabha'
+        hospital: 'City Hospital, City'
       },
       patientInfo: {
         name: 'Rajinder Singh',
@@ -199,7 +199,7 @@ export function PrescriptionUpload({ onBack, onPrescriptionVerified }: Prescript
             name: 'Dr. Preet Singh',
             registration: 'MCI-67890',
             specialization: 'General Physician',
-            hospital: 'Nabha Medical Center'
+            hospital: 'City Medical Center'
           },
           patientInfo: {
             name: 'Rajinder Singh',

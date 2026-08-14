@@ -33,8 +33,8 @@ serve(async (req) => {
     
     const { data: existingUsers } = await supabaseAdmin.auth.admin.listUsers()
     
-    const demoPatientExists = existingUsers?.users?.find(u => u.email === 'demo.patient@nabhasihata.com')
-    const demoDoctorExists = existingUsers?.users?.find(u => u.email === 'demo.doctor@nabhasihata.com')
+    const demoPatientExists = existingUsers?.users?.find(u => u.email === 'demo.patient@kutumbhcare.com')
+    const demoDoctorExists = existingUsers?.users?.find(u => u.email === 'demo.doctor@kutumbhcare.com')
 
     const status = {
       patient: demoPatientExists ? 'exists' : 'missing',

@@ -76,7 +76,7 @@ export function AdminHealthDashboard({ onBack }: AdminHealthDashboardProps) {
         id: '1',
         userId: 'user1',
         userName: 'Ram Singh',
-        location: 'Nabha Central',
+        location: 'City Central',
         coordinates: { lat: 30.1644, lng: 76.1436 },
         wasteDisposal: 'no',
         stagnantWater: 'yes',
@@ -93,7 +93,7 @@ export function AdminHealthDashboard({ onBack }: AdminHealthDashboardProps) {
         id: '2',
         userId: 'user2',
         userName: 'Preet Kaur',
-        location: 'Nabha East',
+        location: 'City East',
         coordinates: { lat: 30.1650, lng: 76.1450 },
         wasteDisposal: 'yes',
         stagnantWater: 'no',
@@ -109,7 +109,7 @@ export function AdminHealthDashboard({ onBack }: AdminHealthDashboardProps) {
         id: '3',
         userId: 'user3',
         userName: 'Gurpreet Singh',
-        location: 'Nabha West',
+        location: 'City West',
         coordinates: { lat: 30.1630, lng: 76.1420 },
         wasteDisposal: 'no',
         stagnantWater: 'yes',
@@ -127,10 +127,10 @@ export function AdminHealthDashboard({ onBack }: AdminHealthDashboardProps) {
     const mockAlerts: HealthAlert[] = [
       {
         id: '1',
-        title: 'Dengue Alert - Nabha Central',
+        title: 'Dengue Alert - City Central',
         message: 'Multiple dengue cases reported in central area. Take preventive measures.',
         severity: 'high',
-        targetArea: 'Nabha Central',
+        targetArea: 'City Central',
         diseaseName: 'Dengue Fever',
         actionableAdvice: 'Remove stagnant water, use mosquito nets, apply repellent',
         createdAt: '2024-01-15T11:00:00Z',
@@ -346,10 +346,10 @@ export function AdminHealthDashboard({ onBack }: AdminHealthDashboardProps) {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">All Locations</SelectItem>
-                  <SelectItem value="Central">Nabha Central</SelectItem>
-                  <SelectItem value="East">Nabha East</SelectItem>
-                  <SelectItem value="West">Nabha West</SelectItem>
-                  <SelectItem value="North">Nabha North</SelectItem>
+                  <SelectItem value="Central">City Central</SelectItem>
+                  <SelectItem value="East">City East</SelectItem>
+                  <SelectItem value="West">City West</SelectItem>
+                  <SelectItem value="North">City North</SelectItem>
                 </SelectContent>
               </Select>
 
@@ -494,7 +494,7 @@ export function AdminHealthDashboard({ onBack }: AdminHealthDashboardProps) {
                   id="alert-title"
                   value={newAlert.title}
                   onChange={(e) => setNewAlert(prev => ({ ...prev, title: e.target.value }))}
-                  placeholder="e.g., Dengue Alert - Nabha Central"
+                  placeholder="e.g., Dengue Alert - City Central"
                 />
               </div>
               
@@ -519,7 +519,7 @@ export function AdminHealthDashboard({ onBack }: AdminHealthDashboardProps) {
                   id="target-area"
                   value={newAlert.targetArea}
                   onChange={(e) => setNewAlert(prev => ({ ...prev, targetArea: e.target.value }))}
-                  placeholder="e.g., Nabha Central, All Areas"
+                  placeholder="e.g., City Central, All Areas"
                 />
               </div>
 

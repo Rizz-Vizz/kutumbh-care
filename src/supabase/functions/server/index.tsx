@@ -23,7 +23,7 @@ const supabase = createClient(
 
 
 app.get('/make-server-dc6a04cf/health', (c) => {
-  return c.json({ status: 'healthy', service: 'nabha-sihata-backend' });
+  return c.json({ status: 'healthy', service: 'city-sihata-backend' });
 });
 
 
@@ -34,22 +34,22 @@ app.post('/make-server-dc6a04cf/create-demo-users', async (c) => {
     const demoUsers = [
       {
         type: 'patient',
-        email: 'demo.patient@nabhasihata.com',
+        email: 'demo.patient@kutumbhcare.com',
         password: 'demo123',
         name: 'Demo Patient',
         phone: '+91 9876543210',
-        village: 'Nabha',
+        village: 'City',
         age: 35
       },
       {
         type: 'doctor',
-        email: 'demo.doctor@nabhasihata.com',
+        email: 'demo.doctor@kutumbhcare.com',
         password: 'demo123',
         name: 'Dr. Demo Singh',
         phone: '+91 9876543211',
         specialty: 'General Medicine',
         license_number: 'DMO12345',
-        hospital: 'Civil Hospital Nabha'
+        hospital: 'Civil Hospital City'
       }
     ];
 

@@ -23,21 +23,21 @@ export const DemoSetup: React.FC<DemoSetupProps> = ({ onComplete, onStatusChange
 
   const demoUsers = {
     patient: {
-      email: 'demo.patient@nabhasihata.com',
+      email: 'demo.patient@kutumbhcare.com',
       password: 'demo123',
       name: 'Demo Patient',
       phone: '+91 9876543210',
-      village: 'Nabha',
+      village: 'City',
       age: 35
     },
     doctor: {
-      email: 'demo.doctor@nabhasihata.com',
+      email: 'demo.doctor@kutumbhcare.com',
       password: 'demo123',
       name: 'Dr. Demo Singh',
       phone: '+91 9876543211',
       specialty: 'General Medicine',
       license_number: 'DMO12345',
-      hospital: 'Civil Hospital Nabha'
+      hospital: 'Civil Hospital City'
     }
   };
 
@@ -188,7 +188,7 @@ export const DemoSetup: React.FC<DemoSetupProps> = ({ onComplete, onStatusChange
         <div className="flex items-center justify-between p-3 bg-blue-50 rounded">
           <div>
             <div className="font-medium">Demo Patient</div>
-            <div className="text-xs text-gray-600">demo.patient@nabhasihata.com</div>
+            <div className="text-xs text-gray-600">demo.patient@kutumbhcare.com</div>
           </div>
           {getStatusIcon(status.patient)}
         </div>
@@ -196,7 +196,7 @@ export const DemoSetup: React.FC<DemoSetupProps> = ({ onComplete, onStatusChange
         <div className="flex items-center justify-between p-3 bg-green-50 rounded">
           <div>
             <div className="font-medium">Demo Doctor</div>
-            <div className="text-xs text-gray-600">demo.doctor@nabhasihata.com</div>
+            <div className="text-xs text-gray-600">demo.doctor@kutumbhcare.com</div>
           </div>
           {getStatusIcon(status.doctor)}
         </div>
@@ -272,8 +272,8 @@ export const DemoSetup: React.FC<DemoSetupProps> = ({ onComplete, onStatusChange
 
       <div className="mt-4 p-3 bg-blue-50 rounded text-xs text-blue-700">
         <strong>Demo Credentials:</strong><br />
-        • Patient: demo.patient@nabhasihata.com<br />
-        • Doctor: demo.doctor@nabhasihata.com<br />
+        • Patient: demo.patient@kutumbhcare.com<br />
+        • Doctor: demo.doctor@kutumbhcare.com<br />
         • Password for both: <code className="bg-blue-100 px-1 rounded">demo123</code>
         
         {(status.patient === 'success' || status.doctor === 'success') && (

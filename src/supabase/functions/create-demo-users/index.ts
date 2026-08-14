@@ -64,13 +64,13 @@ serve(async (req) => {
         // Set user type and type-specific fields
         if (requestBody.email.includes('patient')) {
           profileData.user_type = 'patient'
-          profileData.village = 'Nabha Village'
+          profileData.village = 'City Village'
           profileData.age = 30
         } else if (requestBody.email.includes('doctor')) {
           profileData.user_type = 'doctor'
           profileData.specialty = 'General Medicine'
           profileData.license_number = 'DEMO123'
-          profileData.hospital = 'Nabha PHC'
+          profileData.hospital = 'City PHC'
         } else {
           profileData.user_type = user.user_metadata?.user_type || 'patient'
         }
@@ -129,23 +129,23 @@ serve(async (req) => {
     const demoUsers = [
       {
         type: 'patient',
-        email: 'demo.patient@nabhasihata.com',
+        email: 'demo.patient@kutumbhcare.com',
         password: 'demo123',
         name: 'Demo Patient',
         phone: '+91 9876543210',
-        village: 'Nabha',
+        village: 'City',
         age: 35,
         user_type: 'patient'
       },
       {
         type: 'doctor', 
-        email: 'demo.doctor@nabhasihata.com',
+        email: 'demo.doctor@kutumbhcare.com',
         password: 'demo123',
         name: 'Dr. Demo Singh',
         phone: '+91 9876543211',
         specialty: 'General Medicine',
         license_number: 'DMO12345',
-        hospital: 'Civil Hospital Nabha',
+        hospital: 'Civil Hospital City',
         user_type: 'doctor'
       }
     ]
