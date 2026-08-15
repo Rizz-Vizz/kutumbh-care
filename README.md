@@ -1,6 +1,14 @@
-# 🏥 Kutumbh Care - Predictive AI Health Ecosystem
+<div align="center">
+
+# 🏥 Kutumbh Care
+### Predictive AI Health Ecosystem
 
 **STAMPERS National Hackathon 2026 — Track 3 (Healthcare)**
+
+[![Live Demo](https://img.shields.io/badge/Live_Demo-kutumbh--care.netlify.app-10b981?style=for-the-badge&logo=netlify)](https://kutumbh-care.netlify.app/)
+[![Pitch Video](https://img.shields.io/badge/Pitch_Video-YouTube-ff0000?style=for-the-badge&logo=youtube)](https://youtu.be/4gg1fq6SQGw)
+
+<br/>
 
 <p align="center">
   <a href="#-overview">Overview</a> •
@@ -9,6 +17,8 @@
   <a href="#-technical-architecture">Architecture</a> •
   <a href="#-getting-started">Setup</a>
 </p>
+
+</div>
 
 ---
 
