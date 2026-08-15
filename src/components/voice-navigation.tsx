@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useVoiceCommand } from './speech-recognition-context';
 import { useLanguage } from './language-context';
-import { toast } from 'sonner@2.0.3';
+import { toast } from 'sonner';
 
 interface VoiceNavigationProps {
   onEmergency?: () => void;

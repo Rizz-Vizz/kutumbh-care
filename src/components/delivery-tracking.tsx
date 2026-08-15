@@ -29,7 +29,7 @@ import {
   Heart,
   Gift
 } from 'lucide-react';
-import { toast } from 'sonner@2.0.3';
+import { toast } from 'sonner';
 
 interface DeliveryStep {
   id: string;
@@ -246,9 +246,15 @@ export function DeliveryTracking({ orderId, onBack }: DeliveryTrackingProps) {
           <AlertCircle className="w-16 h-16 text-red-500 mx-auto mb-4" />
           <h3 className="text-xl font-bold text-gray-800 mb-2">Order Not Found</h3>
           <p className="text-gray-600 mb-6">We couldn't find an order with this ID.</p>
-          <Button onClick={onBack} variant="outline">
-            Go Back
-          </Button>
+          <Button 
+  variant="outline" 
+  onClick={onBack} 
+  className="group relative overflow-hidden backdrop-blur-xl bg-white/60 border border-gray-200/80 shadow-[0_2px_10px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.12)] hover:bg-white hover:-translate-y-0.5 transition-all duration-300 text-gray-700 font-bold flex items-center gap-2 rounded-xl px-4 py-2"
+>
+  <div className="absolute inset-0 bg-gradient-to-r from-blue-50/50 to-purple-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+  <ArrowLeft className="w-4 h-4 relative z-10 transition-transform duration-300 group-hover:-translate-x-1" />
+  <span className="relative z-10">Back</span>
+</Button>
         </Card>
       </div>
     );
@@ -281,15 +287,15 @@ export function DeliveryTracking({ orderId, onBack }: DeliveryTrackingProps) {
       <div className="bg-white/80 backdrop-blur-sm shadow-lg border-b border-emerald-100">
         <div className="flex items-center justify-between max-w-4xl mx-auto p-6">
           <div className="flex items-center space-x-4">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={onBack}
-              className="flex items-center space-x-2 hover:bg-emerald-50 border-emerald-200"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              <span>{t('back')}</span>
-            </Button>
+            <Button 
+  variant="outline" 
+  onClick={onBack} 
+  className="group relative overflow-hidden backdrop-blur-xl bg-white/60 border border-gray-200/80 shadow-[0_2px_10px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.12)] hover:bg-white hover:-translate-y-0.5 transition-all duration-300 text-gray-700 font-bold flex items-center gap-2 rounded-xl px-4 py-2"
+>
+  <div className="absolute inset-0 bg-gradient-to-r from-blue-50/50 to-purple-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+  <ArrowLeft className="w-4 h-4 relative z-10 transition-transform duration-300 group-hover:-translate-x-1" />
+  <span className="relative z-10">Back</span>
+</Button>
             <div>
               <h1 className="text-2xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
                 Track Your Order

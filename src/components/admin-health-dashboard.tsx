@@ -9,7 +9,7 @@ import { Label } from './ui/label';
 import { Textarea } from './ui/textarea';
 import { useLanguage } from './language-context';
 import { ArrowLeft, AlertTriangle, TrendingUp, Users, MapPin, Calendar, Search, Plus, Send, Eye, BarChart3, Filter } from 'lucide-react';
-import { toast } from 'sonner@2.0.3';
+import { toast } from 'sonner';
 import { environmentalService } from '../utils/supabase/client';
 
 interface SurveyResponse {
@@ -256,9 +256,15 @@ export function AdminHealthDashboard({ onBack }: AdminHealthDashboardProps) {
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 p-4">
       {}
       <div className="flex items-center mb-6">
-        <Button variant="ghost" onClick={onBack} className="mr-4">
-          <ArrowLeft className="w-5 h-5" />
-        </Button>
+        <Button 
+  variant="outline" 
+  onClick={onBack} 
+  className="group relative overflow-hidden backdrop-blur-xl bg-white/60 border border-gray-200/80 shadow-[0_2px_10px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.12)] hover:bg-white hover:-translate-y-0.5 transition-all duration-300 text-gray-700 font-bold flex items-center gap-2 rounded-xl px-4 py-2"
+>
+  <div className="absolute inset-0 bg-gradient-to-r from-blue-50/50 to-purple-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+  <ArrowLeft className="w-4 h-4 relative z-10 transition-transform duration-300 group-hover:-translate-x-1" />
+  <span className="relative z-10">Back</span>
+</Button>
         <div>
           <h1 className="text-2xl font-bold text-green-600">Environmental Health Dashboard</h1>
           <p className="text-gray-600">Monitor community health risks and send alerts</p>

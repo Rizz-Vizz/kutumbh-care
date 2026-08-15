@@ -3,7 +3,7 @@ import { Button } from './ui/button';
 import { Card } from './ui/card';
 import { useLanguage } from './language-context';
 import { HealthTip } from './health-tip';
-import { toast } from 'sonner@2.0.3';
+import { toast } from 'sonner';
 import { 
   ArrowLeft, 
   Calendar, 
@@ -1759,14 +1759,15 @@ export function PeriodCare({ onBack }: PeriodCareProps) {
     return (
       <div className="min-h-screen bg-gradient-to-b from-pink-50 to-white p-6">
         <div className="flex items-center justify-between mb-8">
-          <Button
-            variant="ghost"
-            onClick={onBack}
-            className="flex items-center space-x-2"
-          >
-            <ArrowLeft className="w-5 h-5" />
-            <span>Back</span>
-          </Button>
+          <Button 
+  variant="outline" 
+  onClick={onBack} 
+  className="group relative overflow-hidden backdrop-blur-xl bg-white/60 border border-gray-200/80 shadow-[0_2px_10px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.12)] hover:bg-white hover:-translate-y-0.5 transition-all duration-300 text-gray-700 font-bold flex items-center gap-2 rounded-xl px-4 py-2"
+>
+  <div className="absolute inset-0 bg-gradient-to-r from-blue-50/50 to-purple-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+  <ArrowLeft className="w-4 h-4 relative z-10 transition-transform duration-300 group-hover:-translate-x-1" />
+  <span className="relative z-10">Back</span>
+</Button>
           <h1 className="font-bold text-pink-600">{getTranslation('periodCare')}</h1>
         </div>
 
@@ -1780,14 +1781,15 @@ export function PeriodCare({ onBack }: PeriodCareProps) {
     <div className="min-h-screen bg-gradient-to-b from-pink-50 to-white p-6">
       {}
       <div className="flex items-center justify-between mb-8">
-        <Button
-          variant="ghost"
-          onClick={onBack}
-          className="flex items-center space-x-2"
-        >
-          <ArrowLeft className="w-5 h-5" />
-          <span>Back</span>
-        </Button>
+        <Button 
+  variant="outline" 
+  onClick={onBack} 
+  className="group relative overflow-hidden backdrop-blur-xl bg-white/60 border border-gray-200/80 shadow-[0_2px_10px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.12)] hover:bg-white hover:-translate-y-0.5 transition-all duration-300 text-gray-700 font-bold flex items-center gap-2 rounded-xl px-4 py-2"
+>
+  <div className="absolute inset-0 bg-gradient-to-r from-blue-50/50 to-purple-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+  <ArrowLeft className="w-4 h-4 relative z-10 transition-transform duration-300 group-hover:-translate-x-1" />
+  <span className="relative z-10">Back</span>
+</Button>
         <h1 className="font-bold text-pink-600">{getTranslation('periodCare')}</h1>
       </div>
 

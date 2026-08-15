@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button } from './ui/button';
 import { Card } from './ui/card';
 import { authService } from '../utils/supabase/client';
-import { toast } from 'sonner@2.0.3';
+import { toast } from 'sonner';
 import { Loader, CheckCircle, XCircle } from 'lucide-react';
 
 interface DemoSetupProps {

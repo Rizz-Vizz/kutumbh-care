@@ -27,7 +27,8 @@ import {
   TrendingUp,
   MapPin,
   LogOut,
-  Shield
+  Shield,
+  ArrowRight
 } from 'lucide-react';
 
 interface DoctorDashboardProps {
@@ -44,6 +45,10 @@ export function DoctorDashboard({ onBack }: DoctorDashboardProps) {
   const [newSurveyCount, setNewSurveyCount] = useState(0);
   
   
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [activeView]);
+
   React.useEffect(() => {
     if (isDemoMode) {
       const checkForNewSurveys = () => {
@@ -155,10 +160,6 @@ export function DoctorDashboard({ onBack }: DoctorDashboardProps) {
       { disease: 'Pregnancy Related', cases: 18, trend: '+20%' }
     ]
   };
-  
-  const handleBack = () => {
-    window.location.reload(); 
-  };
 
   const startConsultation = (appointment: any) => {
     alert(`Starting ${appointment.type} consultation with ${appointment.patient.nameEn}`);
@@ -186,17 +187,12 @@ export function DoctorDashboard({ onBack }: DoctorDashboardProps) {
     return <PrescriptionPad onBack={() => setActiveView('dashboard')} />;
   }
 
-
-
-
-
   if (activeView === 'analytics') {
     return (
       <div className="min-h-screen bg-gradient-to-b from-purple-50 to-white">
-        {}
         <div className="bg-white shadow-sm p-4">
           <div className="flex items-center justify-between max-w-6xl mx-auto">
-            <Button variant="ghost" onClick={() => setActiveView('dashboard')}>
+            <Button variant="ghost" onClick={() => setActiveView('dashboard')} style={{ cursor: 'pointer' }}>
               <ArrowLeft className="w-5 h-5 mr-2" />
               Back to Dashboard
             </Button>
@@ -209,7 +205,6 @@ export function DoctorDashboard({ onBack }: DoctorDashboardProps) {
         </div>
 
         <div className="p-4 max-w-6xl mx-auto space-y-6">
-          {}
           <Card className="p-6">
             <h3 className="font-bold text-gray-800 mb-4 flex items-center">
               <BarChart3 className="w-5 h-5 mr-2 text-purple-500" />
@@ -235,7 +230,6 @@ export function DoctorDashboard({ onBack }: DoctorDashboardProps) {
             </div>
           </Card>
 
-          {}
           <Card className="p-6">
             <h3 className="font-bold text-gray-800 mb-4 flex items-center">
               <Activity className="w-5 h-5 mr-2 text-red-500" />
@@ -262,7 +256,6 @@ export function DoctorDashboard({ onBack }: DoctorDashboardProps) {
             </div>
           </Card>
 
-          {}
           <Card className="p-6">
             <h3 className="font-bold text-gray-800 mb-4 flex items-center">
               <MapPin className="w-5 h-5 mr-2 text-green-500" />
@@ -271,7 +264,7 @@ export function DoctorDashboard({ onBack }: DoctorDashboardProps) {
             <div className="grid grid-cols-3 gap-4">
               <div className="text-center p-4 bg-green-50 rounded-lg">
                 <div className="text-2xl font-bold text-green-600">342</div>
-                <div className="text-sm text-green-800 mt-1">City City</div>
+                <div className="text-sm text-green-800 mt-1">Urban Areas</div>
               </div>
               <div className="text-center p-4 bg-blue-50 rounded-lg">
                 <div className="text-2xl font-bold text-blue-600">156</div>
@@ -290,10 +283,18 @@ export function DoctorDashboard({ onBack }: DoctorDashboardProps) {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-green-50 to-white">
-      {}
       <div className="bg-white shadow-sm p-4">
         <div className="flex items-center justify-between max-w-6xl mx-auto">
           <div className="flex items-center space-x-4">
+            <Button 
+  variant="outline" 
+  onClick={onBack} 
+  className="group relative overflow-hidden backdrop-blur-xl bg-white/60 border border-gray-200/80 shadow-[0_2px_10px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.12)] hover:bg-white hover:-translate-y-0.5 transition-all duration-300 text-gray-700 font-bold flex items-center gap-2 rounded-xl px-4 py-2"
+>
+  <div className="absolute inset-0 bg-gradient-to-r from-blue-50/50 to-purple-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+  <ArrowLeft className="w-4 h-4 relative z-10 transition-transform duration-300 group-hover:-translate-x-1" />
+  <span className="relative z-10">Back</span>
+</Button>
             <div>
               <h1 className="font-bold text-gray-800">
                 {userProfile?.name || (isDemoMode ? 'Dr. Ravi Sharma' : 'Doctor')}
@@ -308,15 +309,12 @@ export function DoctorDashboard({ onBack }: DoctorDashboardProps) {
           </div>
           
           <div className="flex items-center space-x-2">
-            {}
             <LanguageSwitcher />
             
-            <Button variant="outline" size="sm">
-              <ArrowLeft className="w-4 h-4" />
-            </Button>
             <Button 
               variant="ghost" 
               onClick={onBack}
+              style={{ cursor: 'pointer' }}
               className="text-red-600 hover:text-red-700"
             >
               <LogOut className="w-5 h-5 mr-2" />
@@ -327,7 +325,86 @@ export function DoctorDashboard({ onBack }: DoctorDashboardProps) {
       </div>
 
       <div className="p-4 max-w-6xl mx-auto space-y-6">
-        {}
+        {/* AI Risk Alert Panel */}
+        <div 
+          className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden"
+          style={{ borderTop: '4px solid #ef4444' }}
+        >
+          <div className="p-4 border-b border-gray-100 bg-red-50/30">
+            <h3 className="font-bold text-gray-800 flex items-center">
+              🚨 AI Risk Alerts — Patients Needing Attention
+            </h3>
+          </div>
+          <div className="p-4 grid gap-4 lg:grid-cols-3">
+            {/* Card 1 */}
+            <div className="border border-gray-100 rounded-xl p-4 flex flex-col justify-between hover:shadow-md transition-shadow bg-white">
+              <div>
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center space-x-2">
+                    <span className="text-2xl">👨🏽</span>
+                    <div>
+                      <div className="font-semibold text-sm">Arjun Sharma, 45M</div>
+                      <div className="text-xs text-gray-500">Risk Score: 78</div>
+                    </div>
+                  </div>
+                  <span className="bg-red-100 text-red-700 text-[10px] font-bold px-2 py-1 rounded-full">HIGH RISK</span>
+                </div>
+                <div className="w-full bg-gray-200 rounded-full h-1.5 mb-3">
+                  <div className="bg-red-500 h-1.5 rounded-full" style={{ width: '78%' }}></div>
+                </div>
+                <p className="text-xs text-gray-600 mb-4">Systolic BP rising for 5 consecutive days (135→148 mmHg). Anomaly detected.</p>
+              </div>
+              <Button size="sm" variant="outline" className="w-full text-xs" style={{ cursor: 'pointer' }}>
+                Review →
+              </Button>
+            </div>
+            {/* Card 2 */}
+            <div className="border border-gray-100 rounded-xl p-4 flex flex-col justify-between hover:shadow-md transition-shadow bg-white">
+              <div>
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center space-x-2">
+                    <span className="text-2xl">👩🏽</span>
+                    <div>
+                      <div className="font-semibold text-sm">Priya Sharma, 40F</div>
+                      <div className="text-xs text-gray-500">Risk Score: 52</div>
+                    </div>
+                  </div>
+                  <span className="bg-amber-100 text-amber-700 text-[10px] font-bold px-2 py-1 rounded-full">MODERATE</span>
+                </div>
+                <div className="w-full bg-gray-200 rounded-full h-1.5 mb-3">
+                  <div className="bg-amber-500 h-1.5 rounded-full" style={{ width: '52%' }}></div>
+                </div>
+                <p className="text-xs text-gray-600 mb-4">Temperature elevated above normal for 3 days. Trend suggests early infection.</p>
+              </div>
+              <Button size="sm" variant="outline" className="w-full text-xs" style={{ cursor: 'pointer' }}>
+                Review →
+              </Button>
+            </div>
+            {/* Card 3 */}
+            <div className="border border-gray-100 rounded-xl p-4 flex flex-col justify-between hover:shadow-md transition-shadow bg-white">
+              <div>
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center space-x-2">
+                    <span className="text-2xl">👦🏽</span>
+                    <div>
+                      <div className="font-semibold text-sm">Rohan Sharma, 12M</div>
+                      <div className="text-xs text-gray-500">Risk Score: 22</div>
+                    </div>
+                  </div>
+                  <span className="bg-green-100 text-green-700 text-[10px] font-bold px-2 py-1 rounded-full">NORMAL</span>
+                </div>
+                <div className="w-full bg-gray-200 rounded-full h-1.5 mb-3">
+                  <div className="bg-green-500 h-1.5 rounded-full" style={{ width: '22%' }}></div>
+                </div>
+                <p className="text-xs text-gray-600 mb-4">All vitals within normal range. Monitoring continued.</p>
+              </div>
+              <Button size="sm" variant="outline" className="w-full text-xs" style={{ cursor: 'pointer' }}>
+                Review →
+              </Button>
+            </div>
+          </div>
+        </div>
+
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           <Card className="p-4 text-center bg-gradient-to-r from-blue-500 to-blue-600 text-white">
             <Calendar className="w-8 h-8 mx-auto mb-2" />
@@ -354,7 +431,6 @@ export function DoctorDashboard({ onBack }: DoctorDashboardProps) {
           </Card>
         </div>
 
-        {}
         {newSurveyCount > 0 && (
           <Card className="p-4 bg-green-50 border-green-200 border-2">
             <div className="flex items-center justify-between">
@@ -374,6 +450,7 @@ export function DoctorDashboard({ onBack }: DoctorDashboardProps) {
               <Button 
                 onClick={handleHealthAdminClick}
                 className="bg-green-600 hover:bg-green-700"
+                style={{ cursor: 'pointer' }}
               >
                 View Surveys →
               </Button>
@@ -384,14 +461,14 @@ export function DoctorDashboard({ onBack }: DoctorDashboardProps) {
         <div className="grid lg:grid-cols-3 gap-6">
           {/* Today's Appointments */}
           <div className="lg:col-span-2">
-            <Card className="p-6">
+            <Card className="p-6 h-full">
               <h3 className="font-bold text-gray-800 mb-4 flex items-center">
                 <Calendar className="w-5 h-5 mr-2 text-blue-500" />
                 {t('todayAppointments')}
               </h3>
               <div className="space-y-4">
                 {upcomingAppointments.map((appointment) => (
-                  <div key={appointment.id} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                  <div key={appointment.id} className="flex items-center justify-between p-4 bg-white border border-gray-200 rounded-xl shadow-sm">
                     <div className="flex items-center space-x-4">
                       <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
                         <User className="w-6 h-6 text-blue-600" />
@@ -422,6 +499,7 @@ export function DoctorDashboard({ onBack }: DoctorDashboardProps) {
                       <Button 
                         size="sm" 
                         onClick={() => startConsultation(appointment)}
+                        style={{ cursor: 'pointer' }}
                         className={appointment.priority === 'high' ? 'bg-red-500 hover:bg-red-600' : ''}
                       >
                         Start
@@ -442,65 +520,71 @@ export function DoctorDashboard({ onBack }: DoctorDashboardProps) {
                 Quick Actions
               </h3>
               <div className="space-y-3">
-                <Button 
-                  variant="outline" 
-                  className="w-full justify-start h-auto p-4"
-                  onClick={() => setActiveView('patients')}
-                >
-                  <Users className="w-5 h-5 mr-3 text-blue-500" />
-                  <div className="text-left">
-                    <div className="font-semibold">Patient Records</div>
-                    <div className="text-xs text-gray-500">View all patients</div>
-                  </div>
-                </Button>
-                
-                <Button 
-                  variant="outline" 
-                  className="w-full justify-start h-auto p-4"
-                  onClick={() => setActiveView('prescription-pad')}
-                >
-                  <FileText className="w-5 h-5 mr-3 text-green-500" />
-                  <div className="text-left">
-                    <div className="font-semibold">Prescription Pad</div>
-                    <div className="text-xs text-gray-500">Write prescriptions</div>
-                  </div>
-                </Button>
-                
-                <Button 
-                  variant="outline" 
-                  className="w-full justify-start h-auto p-4"
-                  onClick={() => setActiveView('analytics')}
-                >
-                  <BarChart3 className="w-5 h-5 mr-3 text-purple-500" />
-                  <div className="text-left">
-                    <div className="font-semibold">Health Analytics</div>
-                    <div className="text-xs text-gray-500">View trends</div>
-                  </div>
-                </Button>
-                
-                <Button 
-                  variant="outline" 
-                  className="w-full justify-start h-auto p-4"
-                  onClick={handleHealthAdminClick}
-                >
-                  <Shield className="w-5 h-5 mr-3 text-emerald-500" />
-                  <div className="flex-1 text-left">
-                    <div className="font-semibold">Environmental Health</div>
-                    <div className="text-xs text-gray-500">Surveys & Alerts</div>
-                  </div>
-                  {newSurveyCount > 0 && (
-                    <div className="bg-red-500 text-white text-xs rounded-full w-6 h-6 flex items-center justify-center ml-2 animate-pulse">
-                      {newSurveyCount}
+                {[
+                  {
+                    id: 'patients',
+                    title: 'Patient Records',
+                    subtitle: 'View all patients',
+                    icon: <Users className="w-5 h-5 text-blue-600" />,
+                    color: 'bg-blue-100',
+                    onClick: () => setActiveView('patients')
+                  },
+                  {
+                    id: 'prescription-pad',
+                    title: 'Prescription Pad',
+                    subtitle: 'Write prescriptions',
+                    icon: <FileText className="w-5 h-5 text-green-600" />,
+                    color: 'bg-green-100',
+                    onClick: () => setActiveView('prescription-pad')
+                  },
+                  {
+                    id: 'analytics',
+                    title: 'Health Analytics',
+                    subtitle: 'View trends',
+                    icon: <BarChart3 className="w-5 h-5 text-purple-600" />,
+                    color: 'bg-purple-100',
+                    onClick: () => setActiveView('analytics')
+                  },
+                  {
+                    id: 'health-admin',
+                    title: 'Environmental Health',
+                    subtitle: 'Surveys & Alerts',
+                    icon: <Shield className="w-5 h-5 text-teal-600" />,
+                    color: 'bg-teal-100',
+                    onClick: handleHealthAdminClick,
+                    badge: newSurveyCount > 0 ? newSurveyCount : null
+                  }
+                ].map((action, idx) => (
+                  <div
+                    key={idx}
+                    onClick={action.onClick}
+                    style={{ cursor: 'pointer' }}
+                    className="group bg-white rounded-xl border border-gray-200 p-4 flex items-center justify-between transition-all duration-200 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)]"
+                  >
+                    <div className="flex items-center space-x-3">
+                      <div className={`w-10 h-10 rounded-full flex items-center justify-center ${action.color}`}>
+                        {action.icon}
+                      </div>
+                      <div>
+                        <div className="font-bold text-gray-800">{action.title}</div>
+                        <div className="text-sm text-gray-500">{action.subtitle}</div>
+                      </div>
                     </div>
-                  )}
-                </Button>
-                
-
-
+                    <div className="flex items-center">
+                      {action.badge && (
+                        <div className="bg-red-500 text-white text-xs rounded-full w-6 h-6 flex items-center justify-center mr-2 animate-pulse">
+                          {action.badge}
+                        </div>
+                      )}
+                      <span className="text-gray-400 group-hover:text-gray-800 transition-colors">
+                        <ArrowRight className="w-4 h-4" />
+                      </span>
+                    </div>
+                  </div>
+                ))}
               </div>
             </Card>
 
-            {}
             <Card className="p-6">
               <h3 className="font-bold text-gray-800 mb-4 flex items-center">
                 <Users className="w-5 h-5 mr-2 text-green-500" />
@@ -523,7 +607,6 @@ export function DoctorDashboard({ onBack }: DoctorDashboardProps) {
           </div>
         </div>
 
-        {}
         <Card className="p-4 bg-blue-50 border-blue-200">
           <div className="flex items-start space-x-3">
             <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">

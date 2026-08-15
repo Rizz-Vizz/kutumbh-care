@@ -40,8 +40,7 @@ import {
   FileText,
   Building2,
   Heart,
-  Wallet,
-  CreditCard
+  Wallet
 } from 'lucide-react';
 import emergencyIcon from '@/assets/8ee6850e4652ec7e70c14a069845b51d4d91cfed.png';
 import consultationIcon from '@/assets/b7f41f1a17075196391d0be4c6f70303dfa34c07.png';
@@ -66,6 +65,10 @@ export function PatientDashboard({ onBack, selectedMember }: PatientDashboardPro
   const [medCoinsBalance, setMedCoinsBalance] = useState(187); 
   const { t, language } = useLanguage();
   const { userProfile } = useAuth();
+
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [activePanel]);
 
   if (activePanel === 'healthcard') {
     return <HealthCard onBack={() => setActivePanel('dashboard')} selectedMember={selectedMember} />;
@@ -158,7 +161,7 @@ export function PatientDashboard({ onBack, selectedMember }: PatientDashboardPro
 
 
   if (activePanel === 'vitals') {
-    return <VitalsTracker />;
+    return <VitalsTracker onBack={() => setActivePanel('dashboard')} />;
   }
 
   const baseMenuItems = [
@@ -331,6 +334,15 @@ export function PatientDashboard({ onBack, selectedMember }: PatientDashboardPro
       <div className="bg-white shadow-sm p-4">
         <div className="flex items-center justify-between max-w-6xl mx-auto">
           <div className="flex items-center space-x-3">
+            <Button 
+  variant="outline" 
+  onClick={onBack} 
+  className="group relative overflow-hidden backdrop-blur-xl bg-white/60 border border-gray-200/80 shadow-[0_2px_10px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.12)] hover:bg-white hover:-translate-y-0.5 transition-all duration-300 text-gray-700 font-bold flex items-center gap-2 rounded-xl px-4 py-2"
+>
+  <div className="absolute inset-0 bg-gradient-to-r from-blue-50/50 to-purple-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+  <ArrowLeft className="w-4 h-4 relative z-10 transition-transform duration-300 group-hover:-translate-x-1" />
+  <span className="relative z-10">Back</span>
+</Button>
             <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
               <span className="text-white text-lg">{selectedMember?.emoji || '👤'}</span>
             </div>
@@ -368,10 +380,11 @@ export function PatientDashboard({ onBack, selectedMember }: PatientDashboardPro
             </Button>
 
             <Button 
-              variant="outline" 
+              variant="ghost" 
               size="sm"
               onClick={onBack}
-              className="text-red-600 hover:text-red-700"
+              className="text-gray-500 hover:text-red-600"
+              title="Sign Out"
             >
               <LogOut className="w-4 h-4" />
             </Button>

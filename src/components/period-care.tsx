@@ -3,7 +3,7 @@ import { Button } from './ui/button';
 import { Card } from './ui/card';
 import { useLanguage } from './language-context';
 import { HealthTip } from './health-tip';
-import { toast } from 'sonner@2.0.3';
+import { toast } from 'sonner';
 import { 
   ArrowLeft, 
   Calendar, 

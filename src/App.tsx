@@ -24,7 +24,7 @@ import { UserCheck, Globe, Wifi, WifiOff, LogOut, AlertCircle, CheckCircle } fro
 import patientIcon from '@/assets/01ec76020cd14434a23c1ff4857f1dbfbcc6ad1a.png';
 import doctorIcon from '@/assets/50846eb64745974d321291b8a21b1450610141c3.png';
 import newLogo from '@/assets/aa40833ff2e7677dd47ad2ece6ec0264a9ed8be6.png';
-import { toast, Toaster } from 'sonner@2.0.3';
+import { toast, Toaster } from 'sonner';
 import { testConnectionWithSetup, supabase } from './utils/supabase/client';
 import { checkAndSetupApp, SetupResult } from './utils/supabase/auto-setup';
 import { checkDemoUserStatusWithTimeout, repairUserProfileWithTimeout } from './utils/api-helpers';
@@ -78,6 +78,11 @@ function AppContent() {
       window.removeEventListener('offline', handleOffline);
     };
   }, []);
+
+  // Reset scroll position when views change
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [selectedUserType, showMemberSelection, selectedMember, showMedCoins]);
 
   
   React.useEffect(() => {
@@ -214,25 +219,36 @@ function AppContent() {
   };
 
   const handleUserTypeSelect = (userType: 'patient' | 'doctor' | 'pregnant') => {
-    setSelectedUserType(userType);
-    if (userType === 'patient' || userType === 'pregnant') {
-      handleDemoProfileSelect('patient');
-    } else {
-      handleDemoProfileSelect('doctor');
+    if (userType === 'patient') {
+      // Patient: show family member selector first, don't set selectedUserType yet
+      setDemoMode(true);
+      setSelectedDemoProfile('patient');
+      setShowMemberSelection(true);
+      setSelectedUserType(null); // clear so dashboard doesn't fire
+      toast.success('Select a family member to continue');
+    } else if (userType === 'doctor') {
+      setDemoMode(true);
+      setSelectedDemoProfile('doctor');
+      setSelectedUserType('doctor');
+      toast.success('🎉 ' + (t('welcomeDemoDoctor') || 'Welcome, Demo Doctor!'));
+    } else if (userType === 'pregnant') {
+      // Pregnancy: go straight to pregnancy dashboard
+      setDemoMode(true);
+      setSelectedDemoProfile('patient');
+      setSelectedUserType('pregnant');
+      toast.success('🤰 Welcome to Pregnancy Care!');
     }
   };
 
+  // No longer needed separately — merged into handleUserTypeSelect
   const handleDemoProfileSelect = (profileType: 'patient' | 'doctor') => {
     setDemoMode(true);
     setShowLogin(false);
     setSelectedDemoProfile(profileType);
-    
     if (profileType === 'patient') {
       setShowMemberSelection(true);
-      toast.success('🎉 ' + t('welcomeDemoPatient'));
     } else {
       setSelectedUserType(profileType);
-      toast.success('🎉 ' + t('welcomeDemoDoctor'));
     }
   };
 
@@ -247,7 +263,7 @@ function AppContent() {
     if (memberType === 'me') {
       member = {
         id: 'me',
-        name: 'Rajinder Singh',
+        name: 'Arjun Sharma',
         gender: 'male',
         age: 45,
         relationship: 'self',
@@ -258,7 +274,7 @@ function AppContent() {
     } else if (memberType === 'wife') {
       member = {
         id: 'wife',
-        name: 'Simran Kaur',
+        name: 'Priya Sharma',
         gender: 'female',
         age: 40,
         relationship: 'spouse',
@@ -269,7 +285,7 @@ function AppContent() {
     } else if (memberType === 'child') {
       member = {
         id: 'child',
-        name: 'Arjun Singh',
+        name: 'Rohan Sharma',
         gender: 'male',
         age: 12,
         relationship: 'child',
@@ -391,15 +407,15 @@ function AppContent() {
   if (demoMode && selectedUserType) {
     const handleDemoSignOut = () => {
       setSelectedUserType(null);
+      setSelectedMember(null);
       
       if (selectedDemoProfile === 'patient') {
+        // Back from patient dashboard → go to family member selection
         setShowMemberSelection(true);
-        toast.success(t('returnedToFamilySelection'));
       } else {
+        // Back from doctor/pregnancy dashboard → go to home
         setDemoMode(false);
         setSelectedDemoProfile(null);
-        setShowLogin(true);
-        toast.success(t('returnedToLoginScreen'));
       }
     };
     
@@ -557,619 +573,219 @@ function AppContent() {
   
   if (showMemberSelection && demoMode && selectedDemoProfile === 'patient') {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white p-6">
-        {}
-        <div className="fixed top-6 left-6 z-40">
-          <Button
-            variant="outline"
+      <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #f0fdf4 0%, #eff6ff 100%)' }}>
+
+        {/* Header */}
+        <header style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '20px 32px', background: 'rgba(255,255,255,0.85)', backdropFilter: 'blur(12px)', borderBottom: '1px solid rgba(0,0,0,0.06)', position: 'sticky', top: 0, zIndex: 50 }}>
+          <button
             onClick={() => {
               setShowMemberSelection(false);
               setDemoMode(false);
               setSelectedDemoProfile(null);
-              setShowLogin(true);
-              toast.info(t('returnedToLoginScreen'));
+              setSelectedUserType(null);
             }}
-            className="flex items-center space-x-2 bg-white shadow-md"
+            style={{ background: 'none', border: '1px solid #e5e7eb', borderRadius: 10, padding: '8px 16px', cursor: 'pointer', fontWeight: 600, fontSize: 14, color: '#374151', display: 'flex', alignItems: 'center', gap: 8 }}
           >
-            <span>←</span>
-            <span>{t('backToLogin')}</span>
-          </Button>
-        </div>
-
-        {}
-        <div className="fixed top-6 right-6 z-40 flex items-center space-x-3">
+            ← Back to Home
+          </button>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+            <img src={newLogo} alt="Kutumbh Care" style={{ width: 36, height: 36, objectFit: 'contain' }} />
+            <span style={{ fontWeight: 800, fontSize: 18, color: '#15803d' }}>Kutumbh Care</span>
+          </div>
           <LanguageSwitcher />
-          <div className="bg-green-100 border border-green-300 rounded-lg px-3 py-2 shadow-md">
-            <div className="flex items-center space-x-2">
-              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-              <span className="text-sm font-medium text-green-800">{t('demoMode')}</span>
-            </div>
+        </header>
+
+        <div style={{ maxWidth: 800, margin: '0 auto', padding: '48px 24px' }}>
+          <div style={{ textAlign: 'center', marginBottom: 40 }}>
+            <h2 style={{ fontSize: 'clamp(1.5rem, 4vw, 2.5rem)', fontWeight: 900, color: '#111827', marginBottom: 12 }}>Who needs care today?</h2>
+            <p style={{ color: '#6b7280', fontSize: 16 }}>Select a family member to view their personalised health dashboard.</p>
           </div>
-        </div>
 
-        {}
-        <div className="flex justify-center items-center mb-12 mt-20">
-          <div className="flex items-center -space-x-1">
-            <div className="w-28 h-28 flex items-center justify-center">
-              <img 
-                src={newLogo} 
-                alt="Kutumbh Care Logo"
-                className="w-28 h-28 object-contain"
-              />
-            </div>
-            <div>
-              <h1 className="text-3xl font-bold text-green-600">Kutumbh Care</h1>
-              <p className="text-gray-600">{t('tagline') || 'Rural Healthcare Made Simple'}</p>
-            </div>
-          </div>
-        </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 20 }}>
 
-        {}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-800 mb-6">{t('selectFamilyMember') || 'Select Family Member'}</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-6">
-            {t('chooseFamilyMemberDesc') || 'Choose which family member needs healthcare services today.'}
-          </p>
-          <div className="inline-block bg-green-50 border border-green-200 rounded-lg px-6 py-3">
-            <p className="text-green-700">
-              ✨ {t('personalizedHealthcareFeatures') || 'Each member has personalized healthcare features and records'}
-            </p>
-          </div>
-        </div>
+            {/* Me */}
+            <button onClick={() => handleMemberSelect('me')}
+              style={{ background: 'white', border: '2px solid #e5e7eb', borderRadius: 20, padding: '28px 20px', cursor: 'pointer', transition: 'all 0.2s', textAlign: 'center' }}
+              onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = '#22c55e'; (e.currentTarget as HTMLButtonElement).style.transform = 'translateY(-3px)'; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = '#e5e7eb'; (e.currentTarget as HTMLButtonElement).style.transform = 'translateY(0)'; }}
+            >
+              <div style={{ fontSize: 52, marginBottom: 12 }}>👨</div>
+              <div style={{ fontWeight: 800, fontSize: 17, color: '#111827', marginBottom: 4 }}>Arjun Sharma</div>
+              <div style={{ fontSize: 12, color: '#6b7280', marginBottom: 12 }}>Self · 45 yrs · B+</div>
+              <div style={{ background: '#f0fdf4', borderRadius: 8, padding: '6px 10px', fontSize: 12, color: '#15803d', fontWeight: 600 }}>✓ Enter Dashboard</div>
+            </button>
 
-        {}
-        <div className="max-w-4xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {}
-          <Card className="p-8 text-center hover:shadow-xl transition-all cursor-pointer border-2 hover:border-blue-200 transform hover:scale-105"
-                onClick={() => handleMemberSelect('me')}>
-            <div className="w-24 h-24 mx-auto mb-6 text-6xl flex items-center justify-center">
-              👨
-            </div>
-            <h3 className="text-2xl font-bold text-gray-800 mb-3">{t('me') || 'Me'}</h3>
-            <p className="text-gray-600 mb-4">Rajinder Singh</p>
-            <div className="text-sm text-blue-600 bg-blue-50 rounded-lg p-3">
-              <div className="flex items-center justify-center space-x-2 mb-2">
-                <span>📋</span>
-                <span>{t('myHealthRecords') || 'My Health Records'}</span>
-              </div>
-              <div className="flex items-center justify-center space-x-2">
-                <span>🤖</span>
-                <span>{t('symptomCheck')}</span>
-              </div>
-            </div>
-          </Card>
+            {/* Wife */}
+            <button onClick={() => handleMemberSelect('wife')}
+              style={{ background: 'white', border: '2px solid #e5e7eb', borderRadius: 20, padding: '28px 20px', cursor: 'pointer', transition: 'all 0.2s', textAlign: 'center' }}
+              onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = '#ec4899'; (e.currentTarget as HTMLButtonElement).style.transform = 'translateY(-3px)'; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = '#e5e7eb'; (e.currentTarget as HTMLButtonElement).style.transform = 'translateY(0)'; }}
+            >
+              <div style={{ fontSize: 52, marginBottom: 12 }}>👩</div>
+              <div style={{ fontWeight: 800, fontSize: 17, color: '#111827', marginBottom: 4 }}>Priya Sharma</div>
+              <div style={{ fontSize: 12, color: '#6b7280', marginBottom: 12 }}>Spouse · 40 yrs · A+</div>
+              <div style={{ background: '#fdf2f8', borderRadius: 8, padding: '6px 10px', fontSize: 12, color: '#be185d', fontWeight: 600 }}>✓ Enter Dashboard</div>
+            </button>
 
-          {}
-          {familyMembers.map((member) => (
-            <Card key={member.id} className="relative p-8 text-center hover:shadow-xl transition-all cursor-pointer border-2 hover:border-purple-200 transform hover:scale-105"
-                  onClick={() => handleMemberSelect(member.id)}>
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleRemoveFamilyMember(member.id);
-                }}
-                className="absolute top-3 right-3 w-8 h-8 p-0 text-red-500 hover:text-red-700 hover:bg-red-50"
+            {/* Child */}
+            <button onClick={() => handleMemberSelect('child')}
+              style={{ background: 'white', border: '2px solid #e5e7eb', borderRadius: 20, padding: '28px 20px', cursor: 'pointer', transition: 'all 0.2s', textAlign: 'center' }}
+              onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = '#3b82f6'; (e.currentTarget as HTMLButtonElement).style.transform = 'translateY(-3px)'; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = '#e5e7eb'; (e.currentTarget as HTMLButtonElement).style.transform = 'translateY(0)'; }}
+            >
+              <div style={{ fontSize: 52, marginBottom: 12 }}>👦</div>
+              <div style={{ fontWeight: 800, fontSize: 17, color: '#111827', marginBottom: 4 }}>Rohan Sharma</div>
+              <div style={{ fontSize: 12, color: '#6b7280', marginBottom: 12 }}>Child · 12 yrs · O+</div>
+              <div style={{ background: '#eff6ff', borderRadius: 8, padding: '6px 10px', fontSize: 12, color: '#1d4ed8', fontWeight: 600 }}>✓ Enter Dashboard</div>
+            </button>
+
+            {/* Add custom family members */}
+            {familyMembers.map((member) => (
+              <button key={member.id} onClick={() => handleMemberSelect(member.id)}
+                style={{ background: 'white', border: '2px solid #e5e7eb', borderRadius: 20, padding: '28px 20px', cursor: 'pointer', transition: 'all 0.2s', textAlign: 'center', position: 'relative' }}
+                onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = '#8b5cf6'; (e.currentTarget as HTMLButtonElement).style.transform = 'translateY(-3px)'; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = '#e5e7eb'; (e.currentTarget as HTMLButtonElement).style.transform = 'translateY(0)'; }}
               >
-                ✕
-              </Button>
-              
-              <div className="w-24 h-24 mx-auto mb-6 text-6xl flex items-center justify-center">
-                {member.emoji}
-              </div>
-              <h3 className="text-2xl font-bold text-gray-800 mb-3">{member.name}</h3>
-              <p className="text-gray-600 mb-4">{member.age} {t('yearsOld') || 'years old'}</p>
-              <div className="text-sm text-purple-600 bg-purple-50 rounded-lg p-3">
-                <div className="flex items-center justify-center space-x-2 mb-2">
-                  <span>📋</span>
-                  <span>{t('records')}</span>
-                </div>
-                <div className="flex items-center justify-center space-x-2">
-                  {member.showPregnancy ? (
-                    <>
-                      <span>🤰</span>
-                      <span>{t('pregnancyCare') || 'Pregnancy Care'}</span>
-                    </>
-                  ) : (
-                    <>
-                      <span>⚕️</span>
-                      <span>{t('healthcare') || 'Healthcare'}</span>
-                    </>
-                  )}
-                </div>
-              </div>
-            </Card>
-          ))}
+                <button
+                  onClick={e => { e.stopPropagation(); handleRemoveFamilyMember(member.id); }}
+                  style={{ position: 'absolute', top: 8, right: 8, background: '#fef2f2', border: 'none', borderRadius: 6, width: 24, height: 24, cursor: 'pointer', color: '#dc2626', fontWeight: 700, fontSize: 14, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                >×</button>
+                <div style={{ fontSize: 52, marginBottom: 12 }}>{member.emoji}</div>
+                <div style={{ fontWeight: 800, fontSize: 17, color: '#111827', marginBottom: 4 }}>{member.name}</div>
+                <div style={{ fontSize: 12, color: '#6b7280', marginBottom: 12 }}>{member.age} yrs</div>
+                <div style={{ background: '#faf5ff', borderRadius: 8, padding: '6px 10px', fontSize: 12, color: '#7c3aed', fontWeight: 600 }}>✓ Enter Dashboard</div>
+              </button>
+            ))}
 
-          {}
-          <Card className="p-8 text-center hover:shadow-xl transition-all cursor-pointer border-2 border-dashed border-gray-300 hover:border-blue-300 transform hover:scale-105"
-                onClick={() => handleMemberSelect('add')}>
-            <div className="w-24 h-24 mx-auto mb-6 text-6xl flex items-center justify-center text-gray-400">
-              ➕
-            </div>
-            <h3 className="text-2xl font-bold text-gray-800 mb-3">{t('addMember') || 'Add Member'}</h3>
-            <p className="text-gray-600 mb-4">{t('addFamilyMember') || 'Add family member'}</p>
-            <div className="text-sm text-gray-600 bg-gray-50 rounded-lg p-3">
-              <div className="flex items-center justify-center space-x-2 mb-2">
-                <span>👨‍👩‍👧‍👦</span>
-                <span>{t('newMember') || 'New Member'}</span>
-              </div>
-              <div className="flex items-center justify-center space-x-2">
-                <span>⚕️</span>
-                <span>{t('healthSetup') || 'Health Setup'}</span>
-              </div>
-            </div>
-          </Card>
+            {/* Add Member */}
+            <button onClick={() => handleMemberSelect('add')}
+              style={{ background: 'white', border: '2px dashed #d1d5db', borderRadius: 20, padding: '28px 20px', cursor: 'pointer', transition: 'all 0.2s', textAlign: 'center' }}
+              onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = '#6b7280'; (e.currentTarget as HTMLButtonElement).style.transform = 'translateY(-3px)'; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = '#d1d5db'; (e.currentTarget as HTMLButtonElement).style.transform = 'translateY(0)'; }}
+            >
+              <div style={{ fontSize: 52, marginBottom: 12, color: '#9ca3af' }}>+</div>
+              <div style={{ fontWeight: 800, fontSize: 17, color: '#374151', marginBottom: 4 }}>Add Member</div>
+              <div style={{ fontSize: 12, color: '#6b7280' }}>Register a family member</div>
+            </button>
+
+          </div>
         </div>
       </div>
     );
   }
 
-  
-  if (showAuth && selectedUserType && !demoMode) {
-    return (
-      <AuthScreen 
-        userType={selectedUserType} 
-        onBack={() => {
-          setShowAuth(false);
-          setSelectedUserType(null);
-        }} 
-      />
-    );
-  }
 
-  
-  if (showLogin && !demoMode && !user) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-green-50 p-6 flex items-center justify-center">
-        <Card className="max-w-lg w-full p-10 text-center">
-          {}
-          <div className="flex justify-center items-center mb-10">
-            <div className="flex items-center -space-x-1">
-              <div className="w-28 h-28 flex items-center justify-center">
-                <img 
-                  src={newLogo} 
-                  alt="Kutumbh Care Logo"
-                  className="w-28 h-28 object-contain"
-                />
-              </div>
-              <div className="text-left">
-                <h1 className="text-3xl font-bold text-green-600">Kutumbh Care</h1>
-                <p className="text-gray-600">{t('tagline')}</p>
-              </div>
-            </div>
-          </div>
 
-          {}
-          <div className="mb-10">
-            <h2 className="text-3xl font-bold text-gray-800 mb-4">{t('welcome')}</h2>
-            <p className="text-lg text-gray-600">{t('loginWelcomeDesc')}</p>
-          </div>
-
-          {}
-          <div className="flex justify-center items-center space-x-6 mb-10">
-            <VoiceStatus />
-
-            <div className="flex items-center space-x-2">
-              {isOnline ? (
-                <Wifi className="w-5 h-5 text-green-500" />
-              ) : (
-                <WifiOff className="w-5 h-5 text-red-500" />
-              )}
-              <span className="text-sm text-gray-600">
-                {isOnline ? t('online') : t('offline')}
-              </span>
-            </div>
-            
-            <LanguageSwitcher />
-          </div>
-
-          {}
-          <div className="space-y-6">
-            <h3 className="text-xl font-bold text-gray-800 text-center mb-8">{t('chooseLoginMethod') || 'Choose Login Method'}</h3>
-            
-            <Button 
-              onClick={() => {
-                setDemoMode(true);
-                setShowLogin(false);
-              }}
-              className="w-full h-16 bg-gradient-to-r from-blue-500 to-green-500 hover:from-blue-600 hover:to-green-600 text-white text-lg"
-            >
-              <div className="flex items-center space-x-4">
-                <span className="text-3xl">🚀</span>
-                <div className="text-left">
-                  <div className="font-bold">{t('demoLogin') || 'Demo Login'}</div>
-                  <div className="text-sm text-blue-100">{t('instantAccess') || 'Instant access, no setup'}</div>
-                </div>
-              </div>
-            </Button>
-
-            <Button 
-              variant="outline"
-              onClick={() => {
-                setShowLogin(false);
-                setFromSignInWithAccount(true);
-              }}
-              className="w-full h-16 border-2 hover:bg-gray-50"
-            >
-              <div className="flex items-center space-x-4">
-                <span className="text-3xl">🔐</span>
-                <div className="text-left text-gray-700">
-                  <div className="font-bold">{t('signInWithAccount') || 'Sign In With Account'}</div>
-                  <div className="text-sm text-gray-500">{t('forRegisteredUsers') || 'For registered users'}</div>
-                </div>
-              </div>
-            </Button>
-          </div>
-
-          {}
-          <div className="mt-10 grid grid-cols-2 gap-4">
-            <div className="flex items-center justify-center space-x-2 p-3 bg-blue-50 rounded-lg">
-              <span>📞</span>
-              <span className="text-sm">{t('consultation')}</span>
-            </div>
-            <div className="flex items-center justify-center space-x-2 p-3 bg-green-50 rounded-lg">
-              <span>🤖</span>
-              <span className="text-sm">{t('symptomCheck')}</span>
-            </div>
-            <div className="flex items-center justify-center space-x-2 p-3 bg-purple-50 rounded-lg">
-              <span>📋</span>
-              <span className="text-sm">{t('records')}</span>
-            </div>
-            <div className="flex items-center justify-center space-x-2 p-3 bg-red-50 rounded-lg">
-              <span>🚨</span>
-              <span className="text-sm">{t('emergency')}</span>
-            </div>
-          </div>
-        </Card>
-      </div>
-    );
-  }
-
-  
-  if (demoMode && !selectedDemoProfile && !user) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-green-50 p-6 flex items-center justify-center">
-        <div className="fixed top-6 left-6 z-40">
-          <Button
-            variant="outline"
-            onClick={() => {
-              setDemoMode(false);
-              setShowLogin(true);
-            }}
-            className="flex items-center space-x-2 bg-white shadow-md"
-          >
-            <span>←</span>
-            <span>{t('backToLogin') || 'Back to Login'}</span>
-          </Button>
-        </div>
-
-        <Card className="max-w-lg w-full p-10 text-center">
-          {}
-          <div className="flex justify-center items-center mb-10">
-            <div className="flex items-center -space-x-1">
-              <div className="w-28 h-28 flex items-center justify-center">
-                <img 
-                  src={newLogo} 
-                  alt="Kutumbh Care Logo"
-                  className="w-28 h-28 object-contain"
-                />
-              </div>
-              <div className="text-left">
-                <h1 className="text-3xl font-bold text-green-600">Kutumbh Care</h1>
-                <p className="text-gray-600">{t('tagline')}</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="space-y-6">
-            <h3 className="text-xl font-bold text-gray-800 text-center mb-8">{t('chooseDemoProfile') || 'Choose Demo Profile'}</h3>
-            
-            <Card className="p-6 hover:shadow-md transition-all cursor-pointer border-2 hover:border-blue-200 transform hover:scale-105"
-                  onClick={() => handleDemoProfileSelect('patient')}>
-              <div className="flex items-center space-x-4">
-                <div className="w-16 h-16 flex items-center justify-center">
-                  <img 
-                    src={patientIcon} 
-                    alt="Demo Patient"
-                    className="w-16 h-16 object-contain"
-                  />
-                </div>
-                <div className="flex-1 text-left">
-                  <h4 className="text-xl font-bold text-gray-800">{t('demoPatient') || 'Demo Patient'}</h4>
-                  <p className="text-gray-600 mb-3">{t('familyHealthcareManagement') || 'Family healthcare management'}</p>
-                  <div className="flex items-center space-x-2">
-                    <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm">👨‍👩‍👧‍👦 {t('family') || 'Family'}</span>
-                    <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm">🏠 {t('patientPortal') || 'Patient Portal'}</span>
-                  </div>
-                </div>
-                <div className="text-blue-500 text-2xl">→</div>
-              </div>
-            </Card>
-
-            <Card className="p-6 hover:shadow-md transition-all cursor-pointer border-2 hover:border-green-200 transform hover:scale-105"
-                  onClick={() => handleDemoProfileSelect('doctor')}>
-              <div className="flex items-center space-x-4">
-                <div className="w-16 h-16 flex items-center justify-center">
-                  <img 
-                    src={doctorIcon} 
-                    alt="Demo Doctor"
-                    className="w-16 h-16 object-contain"
-                  />
-                </div>
-                <div className="flex-1 text-left">
-                  <h4 className="text-xl font-bold text-gray-800">{t('demoDoctor') || 'Demo Doctor'}</h4>
-                  <p className="text-gray-600 mb-3">{t('healthcareProviderDashboard') || 'Healthcare provider dashboard'}</p>
-                  <div className="flex items-center space-x-2">
-                    <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm">👥 {t('patients')}</span>
-                    <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm">💊 {t('prescriptions')}</span>
-                  </div>
-                </div>
-                <div className="text-green-500 text-2xl">→</div>
-              </div>
-            </Card>
-            
-            <div className="text-center mt-8">
-              <p className="text-gray-600 mb-4">{t('demoAccountDesc')}</p>
-              
-              <div className="text-sm text-gray-500 bg-gray-50 rounded-lg p-4">
-                <div className="flex items-center justify-center space-x-2 mb-2">
-                  <CheckCircle className="w-4 h-4 text-green-500" />
-                  <span>{t('noRegistrationRequired') || 'No registration required'}</span>
-                </div>
-                <div className="flex items-center justify-center space-x-2 mb-2">
-                  <CheckCircle className="w-4 h-4 text-green-500" />
-                  <span>{t('fullFeatureAccess') || 'Full feature access'}</span>
-                </div>
-                <div className="flex items-center justify-center space-x-2">
-                  <CheckCircle className="w-4 h-4 text-green-500" />
-                  <span>{t('worksOffline') || 'Works offline'}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </Card>
-      </div>
-    );
-  }
-
-  
+  // ─── MAIN LANDING PAGE ───────────────────────────────────────────────
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white p-6">
-      {}
-      {fromSignInWithAccount && !demoMode && (
-        <div className="fixed top-6 left-6 z-40">
-          <Button
-            variant="outline"
-            onClick={() => {
-              setFromSignInWithAccount(false);
-              setShowLogin(true);
-              toast.info(t('returnedToLoginScreen'));
-            }}
-            className="flex items-center space-x-2 bg-white shadow-md"
-          >
-            <span>←</span>
-            <span>{t('backToLogin')}</span>
-          </Button>
-        </div>
-      )}
+    <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #f0fdf4 0%, #eff6ff 50%, #faf5ff 100%)' }}>
 
-      {}
-      {demoMode && (
-        <div className="fixed top-6 right-6 z-40">
-          <div className="bg-green-100 border border-green-300 rounded-lg px-4 py-2 shadow-md">
-            <div className="flex items-center space-x-2">
-              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-              <span className="font-medium text-green-800">{t('demoMode')}</span>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {}
-      <div className="flex justify-between items-center mb-12">
-        <div className="flex items-center -space-x-1">
-          <div className="w-28 h-28 flex items-center justify-center">
-            <img 
-              src={newLogo} 
-              alt="Kutumbh Care Logo"
-              className="w-28 h-28 object-contain"
-            />
-          </div>
+      {/* ── Top Bar ── */}
+      <header style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '20px 32px', position: 'sticky', top: 0, backdropFilter: 'blur(12px)', background: 'rgba(255,255,255,0.75)', borderBottom: '1px solid rgba(0,0,0,0.06)', zIndex: 50 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+          <img src={newLogo} alt="Kutumbh Care" style={{ width: 44, height: 44, objectFit: 'contain' }} />
           <div>
-            <h1 className="text-3xl font-bold text-green-600">Kutumbh Care</h1>
-            <p className="text-gray-600">{t('tagline')}</p>
+            <div style={{ fontWeight: 800, fontSize: 20, color: '#15803d', letterSpacing: '-0.5px' }}>Kutumbh Care</div>
+            <div style={{ fontSize: 11, color: '#6b7280', fontWeight: 500 }}>AI-Powered Predictive Health</div>
           </div>
         </div>
-        
-        <div className="flex items-center space-x-4">
-          <div className="flex items-center space-x-2">
-            {isOnline ? (
-              <Wifi className="w-5 h-5 text-green-500" />
-            ) : (
-              <WifiOff className="w-5 h-5 text-red-500" />
-            )}
-            <span className="text-gray-600">
-              {isOnline ? t('online') : t('offline')}
-            </span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 6, background: isOnline ? '#f0fdf4' : '#fef2f2', border: `1px solid ${isOnline ? '#bbf7d0' : '#fecaca'}`, borderRadius: 20, padding: '4px 12px' }}>
+            <div style={{ width: 7, height: 7, borderRadius: '50%', background: isOnline ? '#22c55e' : '#ef4444' }} />
+            <span style={{ fontSize: 12, color: isOnline ? '#15803d' : '#dc2626', fontWeight: 600 }}>{isOnline ? 'Online' : 'Offline'}</span>
           </div>
-          
           <LanguageSwitcher />
         </div>
-      </div>
+      </header>
 
-      {}
-      <div className="text-center mb-16">
-        <h2 className="text-4xl font-bold text-gray-800 mb-6">
-          {demoMode ? (t('chooseYourRole') || 'Choose Your Role') : t('welcome')}
-        </h2>
-        <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-          {demoMode 
-            ? (t('selectPatientOrDoctor') || 'Select whether you are a patient seeking care or a doctor providing care.')
-            : t('welcomeDesc')
-          }
+      {/* ── Hero Section ── */}
+      <section style={{ textAlign: 'center', padding: '72px 24px 48px', maxWidth: 760, margin: '0 auto' }}>
+        <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(21,128,61,0.08)', border: '1px solid rgba(21,128,61,0.2)', borderRadius: 24, padding: '6px 16px', marginBottom: 28, fontSize: 13, color: '#15803d', fontWeight: 600 }}>
+          <span>🏆</span> STAMPERS NATIONAL HACKATHON 2K26 — TRACK 3
+        </div>
+        <h1 style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', fontWeight: 900, color: '#111827', letterSpacing: '-1.5px', lineHeight: 1.1, marginBottom: 20 }}>
+          Predict Health Risks
+          <span style={{ color: '#15803d' }}> Before</span> They Happen
+        </h1>
+        <p style={{ fontSize: 'clamp(1rem, 2.5vw, 1.2rem)', color: '#4b5563', maxWidth: 580, margin: '0 auto 48px', lineHeight: 1.7 }}>
+          Kutumbh Care uses time-series AI and anomaly detection to identify early warning signs — connecting families with doctors before a crisis occurs.
         </p>
-        {demoMode && (
-          <div className="mt-6 inline-block bg-green-50 border border-green-200 rounded-lg px-6 py-3">
-            <p className="text-green-700">
-              ✨ {t('demoModeActive') || "You're in demo mode - all features are fully functional without any setup!"}
-            </p>
-          </div>
-        )}
-      </div>
 
-      {}
-      <div className="max-w-5xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-10">
-        {}
-        <Card className="relative p-10 text-center hover:shadow-xl transition-all cursor-pointer border-2 hover:border-blue-200 transform hover:scale-105"
-              onClick={() => handleUserTypeSelect('patient')}>
-          {demoMode && (
-            <div className="absolute top-3 right-3 bg-green-100 text-green-800 text-xs px-3 py-1 rounded-full">
-              ✨ {t('demoReady')}
-            </div>
-          )}
-          <div className="w-32 h-32 mx-auto mb-8 flex items-center justify-center">
-            <img 
-              src={patientIcon} 
-              alt={t('patient')}
-              className="w-32 h-32 object-contain"
-            />
-          </div>
-          <h3 className="text-2xl font-bold text-gray-800 mb-6">
-            {demoMode ? t('demoPatient') : t('patient')}
-          </h3>
-          <p className="text-gray-600 mb-8">
-            {demoMode 
-              ? (t('experiencePatientJourney') || 'Experience the patient journey with full access to all healthcare features')
-              : t('patientDesc')
-            }
-          </p>
-          <div className="grid grid-cols-2 gap-3">
-            <div className="flex items-center justify-center space-x-2 p-3 bg-blue-50 rounded-lg">
-              <span>📞</span>
-              <span className="text-sm">{t('consultation')}</span>
-            </div>
-            <div className="flex items-center justify-center space-x-2 p-3 bg-blue-50 rounded-lg">
-              <span>📋</span>
-              <span className="text-sm">{t('records')}</span>
-            </div>
-            <div className="flex items-center justify-center space-x-2 p-3 bg-blue-50 rounded-lg">
-              <span>🤖</span>
-              <span className="text-sm">{t('symptomCheck')}</span>
-            </div>
-            <div className="flex items-center justify-center space-x-2 p-3 bg-red-50 rounded-lg">
-              <span>🚨</span>
-              <span className="text-sm">{t('emergency')}</span>
-            </div>
-          </div>
-        </Card>
+        {/* ── Role Cards ── */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 20, maxWidth: 700, margin: '0 auto' }}>
 
-        {}
-        <Card className="relative p-10 text-center hover:shadow-xl transition-all cursor-pointer border-2 hover:border-green-200 transform hover:scale-105"
-              onClick={() => handleUserTypeSelect('doctor')}>
-          {demoMode && (
-            <div className="absolute top-3 right-3 bg-green-100 text-green-800 text-xs px-3 py-1 rounded-full">
-              ✨ {t('demoReady')}
-            </div>
-          )}
-          <div className="w-32 h-32 mx-auto mb-8 flex items-center justify-center">
-            <img 
-              src={doctorIcon} 
-              alt={t('doctor')}
-              className="w-32 h-32 object-contain"
-            />
-          </div>
-          <h3 className="text-2xl font-bold text-gray-800 mb-6">
-            {demoMode ? t('demoDoctor') : t('doctor')}
-          </h3>
-          <p className="text-gray-600 mb-8">
-            {demoMode 
-              ? (t('exploreDoctorDashboard') || 'Explore the doctor dashboard with patient management and consultation tools')
-              : t('doctorDesc')
-            }
-          </p>
-          <div className="grid grid-cols-2 gap-3">
-            <div className="flex items-center justify-center space-x-2 p-3 bg-green-50 rounded-lg">
-              <span>👥</span>
-              <span className="text-sm">{t('patients')}</span>
-            </div>
-            <div className="flex items-center justify-center space-x-2 p-3 bg-green-50 rounded-lg">
-              <span>📊</span>
-              <span className="text-sm">{t('analytics')}</span>
-            </div>
-            <div className="flex items-center justify-center space-x-2 p-3 bg-green-50 rounded-lg">
-              <span>💊</span>
-              <span className="text-sm">{t('prescriptions')}</span>
-            </div>
-            <div className="flex items-center justify-center space-x-2 p-3 bg-green-50 rounded-lg">
-              <span>📱</span>
-              <span className="text-sm">{t('appointments')}</span>
-            </div>
-          </div>
-        </Card>
+          {/* Patient Card */}
+          <button
+            onClick={() => handleUserTypeSelect('patient')}
+            style={{ background: 'white', border: '2px solid #e5e7eb', borderRadius: 20, padding: '32px 24px', cursor: 'pointer', transition: 'all 0.2s', boxShadow: '0 4px 24px rgba(0,0,0,0.06)', textAlign: 'center' }}
+            onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = '#22c55e'; (e.currentTarget as HTMLButtonElement).style.transform = 'translateY(-4px)'; (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 12px 40px rgba(34,197,94,0.15)'; }}
+            onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = '#e5e7eb'; (e.currentTarget as HTMLButtonElement).style.transform = 'translateY(0)'; (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 4px 24px rgba(0,0,0,0.06)'; }}
+          >
+            <div style={{ width: 72, height: 72, borderRadius: '50%', background: 'linear-gradient(135deg, #dcfce7, #bbf7d0)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px', fontSize: 36 }}>🧑‍🤝‍🧑</div>
+            <div style={{ fontWeight: 800, fontSize: 20, color: '#111827', marginBottom: 6 }}>Enter as Patient</div>
+            <div style={{ fontSize: 13, color: '#6b7280', lineHeight: 1.5 }}>Track vitals, check symptoms, book consultations</div>
+            <div style={{ marginTop: 16, background: '#f0fdf4', borderRadius: 10, padding: '8px 12px', fontSize: 12, color: '#15803d', fontWeight: 600 }}>→ Family Dashboard</div>
+          </button>
 
-        {}
-        {demoMode && (
-          <Card className="relative p-10 text-center hover:shadow-xl transition-all cursor-pointer border-2 hover:border-pink-200 transform hover:scale-105"
-                onClick={() => handleUserTypeSelect('pregnant')}>
-            <div className="absolute top-3 right-3 bg-green-100 text-green-800 text-xs px-3 py-1 rounded-full">
-              ✨ {t('demoReady')}
-            </div>
-            <div className="w-32 h-32 mx-auto mb-8 flex items-center justify-center">
-              <div className="text-8xl">🤰</div>
-            </div>
-            <h3 className="text-2xl font-bold text-gray-800 mb-6">
-              {t('pregnancy') || 'Pregnancy'}
-            </h3>
-            <p className="text-gray-600 mb-8">
-              {t('specializedPregnancyCare') || 'Specialized pregnancy care with diet plans, doctor appointments, and exercise reminders'}
-            </p>
-            <div className="grid grid-cols-2 gap-3">
-              <div className="flex items-center justify-center space-x-2 p-3 bg-pink-50 rounded-lg">
-                <span>👶</span>
-                <span className="text-sm">{t('prenatalCare') || 'Prenatal Care'}</span>
-              </div>
-              <div className="flex items-center justify-center space-x-2 p-3 bg-pink-50 rounded-lg">
-                <span>🥗</span>
-                <span className="text-sm">{t('dietPlans') || 'Diet Plans'}</span>
-              </div>
-              <div className="flex items-center justify-center space-x-2 p-3 bg-pink-50 rounded-lg">
-                <span>🤸‍♀️</span>
-                <span className="text-sm">{t('exercise') || 'Exercise'}</span>
-              </div>
-              <div className="flex items-center justify-center space-x-2 p-3 bg-pink-50 rounded-lg">
-                <span>📅</span>
-                <span className="text-sm">{t('checkups') || 'Checkups'}</span>
-              </div>
-            </div>
-          </Card>
-        )}
-      </div>
+          {/* Doctor Card */}
+          <button
+            onClick={() => handleUserTypeSelect('doctor')}
+            style={{ background: 'white', border: '2px solid #e5e7eb', borderRadius: 20, padding: '32px 24px', cursor: 'pointer', transition: 'all 0.2s', boxShadow: '0 4px 24px rgba(0,0,0,0.06)', textAlign: 'center' }}
+            onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = '#3b82f6'; (e.currentTarget as HTMLButtonElement).style.transform = 'translateY(-4px)'; (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 12px 40px rgba(59,130,246,0.15)'; }}
+            onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = '#e5e7eb'; (e.currentTarget as HTMLButtonElement).style.transform = 'translateY(0)'; (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 4px 24px rgba(0,0,0,0.06)'; }}
+          >
+            <div style={{ width: 72, height: 72, borderRadius: '50%', background: 'linear-gradient(135deg, #dbeafe, #bfdbfe)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px', fontSize: 36 }}>👨‍⚕️</div>
+            <div style={{ fontWeight: 800, fontSize: 20, color: '#111827', marginBottom: 6 }}>Enter as Doctor</div>
+            <div style={{ fontSize: 13, color: '#6b7280', lineHeight: 1.5 }}>View patient risk alerts, manage records & prescriptions</div>
+            <div style={{ marginTop: 16, background: '#eff6ff', borderRadius: 10, padding: '8px 12px', fontSize: 12, color: '#1d4ed8', fontWeight: 600 }}>→ Clinical Dashboard</div>
+          </button>
 
-      {}
-      <div className="text-center mt-20 text-gray-500">
-        <p className="flex items-center justify-center space-x-2 mb-6">
-          <span>🏥</span>
-          <span>{t('poweredBy')}</span>
-        </p>
-        
-        {}
-        {autoSetupStatus.completed && autoSetupStatus.result && autoSetupStatus.result.demoUsersCreated && (
-          <div className="max-w-md mx-auto bg-green-50 border-green-200 border rounded-lg p-4">
-            <div className="flex items-center justify-center mb-2">
-              <span className="text-green-600 mr-2">🎉</span>
-              <span className="font-medium text-green-800">{t('autoSetupComplete')}</span>
+          {/* Pregnancy Card */}
+          <button
+            onClick={() => handleUserTypeSelect('pregnant')}
+            style={{ background: 'white', border: '2px solid #e5e7eb', borderRadius: 20, padding: '32px 24px', cursor: 'pointer', transition: 'all 0.2s', boxShadow: '0 4px 24px rgba(0,0,0,0.06)', textAlign: 'center' }}
+            onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = '#ec4899'; (e.currentTarget as HTMLButtonElement).style.transform = 'translateY(-4px)'; (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 12px 40px rgba(236,72,153,0.15)'; }}
+            onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = '#e5e7eb'; (e.currentTarget as HTMLButtonElement).style.transform = 'translateY(0)'; (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 4px 24px rgba(0,0,0,0.06)'; }}
+          >
+            <div style={{ width: 72, height: 72, borderRadius: '50%', background: 'linear-gradient(135deg, #fce7f3, #fbcfe8)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px', fontSize: 36 }}>🤰</div>
+            <div style={{ fontWeight: 800, fontSize: 20, color: '#111827', marginBottom: 6 }}>Pregnancy Care</div>
+            <div style={{ fontSize: 13, color: '#6b7280', lineHeight: 1.5 }}>Diet plans, checkups, exercises & trimester tracker</div>
+            <div style={{ marginTop: 16, background: '#fdf2f8', borderRadius: 10, padding: '8px 12px', fontSize: 12, color: '#be185d', fontWeight: 600 }}>→ Maternal Dashboard</div>
+          </button>
+
+        </div>
+      </section>
+
+      {/* ── Feature Strip ── */}
+      <section style={{ padding: '0 24px 80px', maxWidth: 900, margin: '0 auto' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 16 }}>
+          {[
+            { icon: '📈', title: 'Time-Series Vitals', desc: 'Track BP, temp & weight trends daily', color: '#eff6ff', accent: '#1d4ed8' },
+            { icon: '🚨', title: 'Anomaly Detection', desc: 'AI flags abnormal readings instantly', color: '#fef2f2', accent: '#dc2626' },
+            { icon: '🧠', title: 'Explainable AI', desc: '0–100 risk score with reasoning', color: '#f0fdf4', accent: '#15803d' },
+            { icon: '📞', title: 'Teleconsultation', desc: 'Video call doctors in seconds', color: '#faf5ff', accent: '#7c3aed' },
+            { icon: '📄', title: 'Lab Report AI', desc: 'Upload PDF — AI extracts values', color: '#fff7ed', accent: '#c2410c' },
+            { icon: '⌚', title: 'Wearable Sync', desc: 'Connect Apple Watch / Fitbit', color: '#f0fdf4', accent: '#15803d' },
+            { icon: '🔒', title: 'Secure Architecture', desc: 'End-to-end encrypted medical data', color: '#f8fafc', accent: '#475569' },
+            { icon: '📴', title: 'Offline Mode', desc: 'Logs vitals without internet connection', color: '#ecfeff', accent: '#0891b2' },
+          ].map((f, i) => (
+            <div key={i} style={{ background: f.color, borderRadius: 16, padding: '20px 16px', border: `1px solid ${f.accent}22` }}>
+              <div style={{ fontSize: 28, marginBottom: 8 }}>{f.icon}</div>
+              <div style={{ fontWeight: 700, fontSize: 14, color: '#111827', marginBottom: 4 }}>{f.title}</div>
+              <div style={{ fontSize: 12, color: '#6b7280', lineHeight: 1.5 }}>{f.desc}</div>
             </div>
-            <p className="text-sm text-green-700">
-              {t('demoAccountsCreated')}
-            </p>
-          </div>
-        )}
-      </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── Footer ── */}
+      <footer style={{ textAlign: 'center', padding: '24px', borderTop: '1px solid #f3f4f6', color: '#9ca3af', fontSize: 12 }}>
+        <p>Kutumbh Care · AI-Powered Predictive Health Platform · Built for STAMPERS 2K26 Track 3</p>
+      </footer>
     </div>
   );
 }
+
 
 export default function App() {
   return (

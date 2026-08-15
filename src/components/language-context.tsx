@@ -25,7 +25,7 @@ const translations = {
     analytics: "Reports",
     prescriptions: "Medicine",
     appointments: "Schedule",
-    poweredBy: "Government of State Health Initiative",
+    poweredBy: "Kutumbh Care — AI-Powered Predictive Health Platform",
     online: "Online",
     offline: "Offline",
     
@@ -93,7 +93,7 @@ const translations = {
     loading: "Loading",
     signOutSuccessful: "Signed out successfully",
     demoAccountDesc: "Experience all features instantly without setup",
-    loginWelcomeDesc: "Access healthcare services designed for rural communities with voice support in Statei, Hindi, and English.",
+    loginWelcomeDesc: "AI-driven early risk detection for every Indian family. Supports English, Hindi, and Punjabi.",
     
     chooseLoginMethod: "Choose Login Method",
     demoLogin: "Demo Login",
