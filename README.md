@@ -102,4 +102,3 @@ Kutumbh Care is built using a modern, scalable, and highly secure tech stack:
 *   **Row Level Security (RLS):** Supabase policies ensure patients can only access their own household data.
 
 ---
-*Built with ❤️ for STAMPERS 2026.*
