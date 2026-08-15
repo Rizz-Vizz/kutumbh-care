@@ -1,132 +1,89 @@
-<div align="center">
-  
-# 🏥 Kutumbh Care
-### *Transforming Rural Healthcare: Where Every Village Counts*
+# 🏥 Kutumbh Care - Predictive AI Health Ecosystem
 
-<div align="center">
+![Kutumbh Care Logo/Banner Placeholder]
 
-[![Live Demo](https://img.shields.io/badge/Live_Demo-Nabha_Sihata-blue?style=for-the-badge&logo=netlify)](https://nabha-sihata.netlify.app/)
-[![React](https://img.shields.io/badge/React-18.3.1-61DAFB?style=for-the-badge&logo=react)](https://react.dev)
-[![Vite](https://img.shields.io/badge/Vite-6.3.5-646CFF?style=for-the-badge&logo=vite)](https://vitejs.dev)
-[![Supabase](https://img.shields.io/badge/Supabase-Database_&_Auth-3ECF8E?style=for-the-badge&logo=supabase)](https://supabase.com)
-[![AI Powered](https://img.shields.io/badge/AI_Powered-FF6F00?style=for-the-badge)](https://nabha-sihata.netlify.app/)
-
-</div>
-
-*Scalable. Inclusive. Ready for Rural Communities.*
-
-</div>
+**STAMPERS National Hackathon 2026 — Track 3 (Healthcare)**
+**Team:** Swasthya Rakshak
 
 ---
 
-## 📖 About The Project
+## 🚀 Overview
 
-**Kutumbh Care** is a comprehensive mobile and web-based telemedicine platform designed specifically to bridge the healthcare gap in underserved rural areas. It seamlessly connects patients with certified doctors, offering high-quality video and audio consultations, digital prescriptions, and vital follow-up support.
+Kutumbh Care is a **Predictive AI Health Ecosystem** designed to shift the medical paradigm from *reactive* care to *predictive* early intervention. Built for rural and semi-urban India, the platform seamlessly connects patients, doctors, and expecting mothers through a unified, offline-capable Tri-Portal system.
 
-Recognizing that rural healthcare faces unique challenges such as low digital literacy, poor network connectivity, and language barriers, Kutumbh Care is engineered to overcome these hurdles. With **offline capabilities, low-data usage, and full multilingual support** (English, Hindi, Statei), we ensure that every household has uninterrupted access to quality healthcare.
-
----
-
-## ✨ Features
-
-### 🗣️ AI-Powered Voice Symptom Checker
-A voice-guided, multilingual intelligent interface that allows users to seamlessly describe their symptoms in their native language. Our AI chatbot provides preliminary assessments and automatically navigates the patient to the most relevant specialist.
-
-### 👨‍👩‍👧‍👦 Family Management Portal
-Designed for households that share a single mobile device. The family portal enables users to easily add, manage, and book appointments for children, elders, and other family members from one centralized and intuitive dashboard.
-
-### 📶 Offline & Low-Bandwidth Mode
-Critical features remain completely functional even in low-connectivity zones or offline environments. Data syncs seamlessly in the background the moment network connectivity is restored.
-
-### 🤰 Women & Maternal Health Hub
-Specialized tools focusing on women's health. Features include comprehensive period tracking, pregnancy care guidance, and culturally relevant health alerts that empower women with safety and care.
-
-### 💊 Digital Health Records & Pharmacy
-Secure, centralized digital storage for all medical records and digital prescriptions. The platform also includes an integrated pharmacy module and automated medication reminders to ensure consistent care.
-
-### 🪙 MedCoins Reward System
-A unique, blockchain-inspired loyalty program to drive community engagement. Users earn MedCoins for regular health checkups and healthy behaviors, which can be redeemed for consultations and lab tests.
-
-### 🔔 Automated Alerts & Community Awareness
-Timely SMS and push notifications for upcoming appointments, medication schedules, and localized community awareness messages for early disease prevention.
-
-[![Nabha Sihata Demo](https://img.youtube.com/vi/cC9UvJ_iXv0/maxresdefault.jpg)](https://www.youtube.com/watch?v=cC9UvJ_iXv0)
-
+Unlike traditional telemedicine platforms that simply digitize consultations, Kutumbh Care leverages **Explainable AI (XAI)** and **Time-Series Anomaly Detection** to flag health risks *before* they become irreversible emergencies.
 
 ---
 
-## 🛠️ Technical Stack
+## 🌟 Core Innovations
 
-Our architecture is built to be robust, secure, and scalable to support millions of users.
+### 1. 🧠 Predictive AI & Explainable AI (XAI)
+*   **Time-Series Vitals Engine:** Continuously monitors Blood Pressure, Heart Rate, and SpO2 to generate a dynamic 0-100 Risk Score.
+*   **XAI Risk Alerts:** Eliminates "black-box" AI skepticism by providing doctors with clear clinical reasoning (e.g., *"Systolic BP rising for 5 consecutive days"*).
 
-- **Frontend:** React.js, Vite, Tailwind CSS (Web) & React Native (Mobile)
-- **Backend:** Node.js, Express.js
-- **Database & Authentication:** Supabase (PostgreSQL)
-- **Offline Caching:** SQLite, Service Workers
-- **AI & Machine Learning:** TensorFlow, Python (Predictive insights & NLP)
-- **Communications:** WebRTC (High-quality Video/Audio consultations)
-- **Notifications:** Firebase Cloud Messaging, Twilio
-- **Security:** JWT Authentication, HTTPS encryption
-- **Deployment:** Docker, Kubernetes, AWS/GCP
+### 2. 📴 Built for India (Offline-First)
+*   **Zero Connectivity? No Problem:** Uses IndexedDB and Service Workers to cache vitals and health logs locally. 
+*   **Background Sync:** Automatically pushes encrypted data to the cloud the moment connectivity is restored.
+*   **Multilingual:** Full React-i18next support for English, Hindi, and Punjabi.
 
-  <img width="1192" height="1001" alt="image" src="https://github.com/user-attachments/assets/2932a4e5-088c-4d70-b63a-ff85eb65b6a1" />
-
+### 3. 🔄 Seamless Heterogeneous Data Ingestion
+*   **Wearable Sync API:** Pulls continuous, real-time data directly from Apple Watch and Fitbit.
+*   **Lab Report AI Parsing (OCR/NLP):** Instantly extracts structured clinical data from uploaded PDF reports, eliminating manual data entry.
 
 ---
 
-## 🚀 Getting Started
+## 🛠️ Tri-Portal System
 
-Follow these steps to set up the project locally on your machine for development and testing.
+The application offers three dedicated workspaces optimized for specific user needs:
+
+1.  **👨‍👩‍👧 Patient / Family Portal:** Allows entire households to use a single device. Features Teleconsultation (WebRTC), Vitals Tracking, and a Pharmacy Wallet.
+2.  **👨‍⚕️ Doctor Dashboard:** Provides clinicians with XAI Risk Alerts, Patient Records, and a fully digital Prescription Pad.
+3.  **🤰 Maternity & Period Care:** Specialized tracking for expecting mothers, including week-by-week baby development and personalized diet plans.
+
+---
+
+## 🏗️ Technical Architecture
+
+Kutumbh Care is built using a modern, scalable, and highly secure tech stack:
+
+*   **Frontend:** React, Vite, Tailwind CSS, TypeScript (Progressive Web App).
+*   **State & Offline Layer:** React Context API + LocalStorage/IndexedDB.
+*   **Backend & Auth:** Supabase (PostgreSQL, Row Level Security, Real-time sync).
+*   **AI Engine:** Python/TensorFlow (Time-Series Anomaly Detection & NLP).
+*   **Communication:** WebRTC (Live Video Teleconsultation).
+
+---
+
+## 💻 Getting Started
 
 ### Prerequisites
-Make sure you have [Node.js](https://nodejs.org/) (v18+ recommended) and `npm` installed.
+*   Node.js (v18+)
+*   npm or yarn
 
 ### Installation
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/YourUsername/telemedicine-app-city.git
-   cd telemedicine-app-city
-   ```
-
-2. **Install dependencies**
-   ```bash
+1. Clone the repository:
+   \`\`\`bash
+   git clone https://github.com/Rizz-Vizz/kutumbh-care.git
+   \`\`\`
+2. Navigate to the project directory:
+   \`\`\`bash
+   cd kutumbh-care
+   \`\`\`
+3. Install dependencies:
+   \`\`\`bash
    npm install
-   ```
-
-3. **Set up Environment Variables**
-   Create a `.env` file in the root directory and add your Supabase credentials:
-   ```env
-   VITE_SUPABASE_URL=your_supabase_url
-   VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
-   ```
-
-4. **Start the Development Server**
-   ```bash
+   \`\`\`
+4. Start the development server:
+   \`\`\`bash
    npm run dev
-   ```
-   *The app will be running at `http://localhost:3000`*
-
-### Build for Production
-To generate a highly optimized production build:
-```bash
-npm run build
-```
+   \`\`\`
+5. Open your browser and navigate to \`http://localhost:3000\`.
 
 ---
 
-## 🌍 Impact
-
-* **Accessibility:** Drastically reduces travel costs and waiting times, preventing wage loss due to long medical travels.
-* **Early Diagnosis:** Proactive healthcare tools reduce the risk of serious illnesses and empower families with health awareness in their native language.
-* **Economic Viability:** Integrates local pharmacies and grassroots workers into a unified digital ecosystem.
-  
-<div align="center">
-<img width="606" height="406" alt="image" src="https://github.com/user-attachments/assets/ed96556b-47d0-43b7-b6a0-45ff95feb258" />
-</div>
+## 🛡️ Security & Compliance
+*   **End-to-End Encryption:** Satisfies stringent Track 3 medical data security requirements.
+*   **Row Level Security (RLS):** Supabase policies ensure patients can only access their own household data.
 
 ---
-
-<div align="center">
-  <b>Transforming Rural Healthcare, Where Every Village Counts</b>
-</div>
+*Built with ❤️ by Team Swasthya Rakshak for STAMPERS 2026.*
