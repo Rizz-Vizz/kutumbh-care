@@ -57,7 +57,7 @@ The application offers three dedicated workspaces optimized for specific user ne
 
 ---
 
-## 🏗️ Technical Architecture
+## 🏗️ Architecture
 
 Kutumbh Care is built using a modern, scalable, and highly secure tech stack:
 
@@ -67,6 +67,7 @@ Kutumbh Care is built using a modern, scalable, and highly secure tech stack:
 *   **AI Engine:** Python/TensorFlow (Time-Series Anomaly Detection & NLP).
 *   **Communication:** WebRTC (Live Video Teleconsultation).
 
+<img width="4968" height="6441" alt="diagram (2)" src="https://github.com/user-attachments/assets/0d91ef76-1a42-4295-a8f7-9d68140239a1" />
 ---
 
 ## 💻 Getting Started
