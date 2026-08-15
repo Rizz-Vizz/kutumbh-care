@@ -1,9 +1,14 @@
 # 🏥 Kutumbh Care - Predictive AI Health Ecosystem
 
-![Kutumbh Care Logo/Banner Placeholder]
-
 **STAMPERS National Hackathon 2026 — Track 3 (Healthcare)**
-**Team:** Swasthya Rakshak
+
+<p align="center">
+  <a href="#-overview">Overview</a> •
+  <a href="#-core-innovations">Innovations</a> •
+  <a href="#️-tri-portal-system">Tri-Portal</a> •
+  <a href="#-technical-architecture">Architecture</a> •
+  <a href="#-getting-started">Setup</a>
+</p>
 
 ---
 
@@ -86,4 +91,4 @@ Kutumbh Care is built using a modern, scalable, and highly secure tech stack:
 *   **Row Level Security (RLS):** Supabase policies ensure patients can only access their own household data.
 
 ---
-*Built with ❤️ by Team Swasthya Rakshak for STAMPERS 2026.*
+*Built with ❤️ for STAMPERS 2026.*
